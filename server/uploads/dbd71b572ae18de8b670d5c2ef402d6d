@@ -1,0 +1,586 @@
+김찬민 님과 카카오톡 대화
+저장한 날짜 : 2023-05-03 19:08:04
+
+--------------- 2023년 1월 25일 수요일 ---------------
+[김찬민] [오전 10:59] 파일: [13305] 주유소.py
+[김찬민] [오후 12:01] 파일: [1915] 가장 큰 정사각형.py
+[김찬민] [오후 1:11] 파일: [4659] 비밀번호 발음하기.py
+--------------- 2023년 1월 26일 목요일 ---------------
+[김찬민] [오후 4:52] 파일: check.html
+[김찬민] [오후 4:52] 파일: day02ex01.html
+[김찬민] [오후 4:52] 파일: day02ex01_2.html
+[김찬민] [오후 4:52] 파일: day02ex02(t).html
+[김찬민] [오후 4:52] 파일: day02ex02.html
+[김찬민] [오후 4:52] 파일: day02ex03.html
+[김찬민] [오후 4:52] 파일: day02ex04.html
+[김찬민] [오후 4:52] 파일: day02ex05.html
+[김찬민] [오후 4:52] 파일: day02ex06.html
+[김찬민] [오후 4:52] 파일: day02ex07.html
+[김찬민] [오후 4:52] 파일: day02ex08.html
+[김찬민] [오후 4:52] 파일: day02ex09.html
+[김찬민] [오후 4:52] 파일: day02ex10.html
+[김찬민] [오후 4:52] 파일: day02ex11.html
+[김찬민] [오후 4:53] 파일: 정리02.txt
+[김찬민] [오후 4:53] 파일: 과제02.txt
+[김찬민] [오후 5:29] 파일: day02ex10.html
+[김찬민] [오후 5:29] 파일: day02ex11.html
+[김찬민] [오후 7:20] 파일: 2023년 1월 26일 스캔.pdf
+--------------- 2023년 1월 27일 금요일 ---------------
+[김찬민] [오후 3:06] 파일: [17298] 오큰수.py
+[김찬민] [오후 4:42] 주말 : 삭제 버튼 구현하기
+[김찬민] [오후 4:52] 파일: day03.zip
+[김찬민] [오후 4:53] 파일: [17298] 오큰수.py
+--------------- 2023년 1월 30일 월요일 ---------------
+[김찬민] [오전 9:36] 파일: [12919] A와 B 2.py
+[김찬민] [오후 4:51] 파일: day04.zip
+[김찬민] [오후 4:51] 파일: day04_nodejs.zip
+--------------- 2023년 1월 31일 화요일 ---------------
+[김찬민] [오후 4:48] 파일: 0503.html
+[김찬민] [오후 4:49] 1. 오전에 하던 slider 완성
+2. 무료 템플릿 수정해서 firebase에 deploy
+3. 배운 내용 note 정리해서 게시판에 올리기
+[김찬민] [오후 4:52] https://console.firebase.google.com/?hl=ko
+[김찬민] [오후 4:52] 파일: day05_firebase.zip
+[김찬민] [오후 10:46] 동영상
+--------------- 2023년 2월 1일 수요일 ---------------
+[김찬민] [오후 2:52] 파일: [2665] 미로만들기.py
+--------------- 2023년 2월 2일 목요일 ---------------
+[김찬민] [오후 4:54] <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>jsDay02Homework.html</title>
+    <style>
+      div.gameBox {
+        border: 1px solid orange;
+        width: 308px;
+        height: 108px;
+        overflow: hidden;
+      }
+      div.gameBox ul {
+        margin: 0;
+        padding: 0px;
+        float: left;
+      }
+      div.gameBox li {
+        width: 100px;
+        height: 100px;
+        border: 1px solid black;
+        list-style: none;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>햄버거 하우스 게임</h1>
+    <div class="gameBox"></div>
+
+    <script>
+      function MakeUl(gameBox) {
+        this.init = function () {
+          this.ulTag = document.createElement("ul");
+          for (var i = 1; i <= 10; i++) {
+            var li = document.createElement("li");
+            li.innerText = i;
+            this.ulTag.appendChild(li);
+          }
+          gameBox.appendChild(this.ulTag);
+
+          // 게임 실행
+          this.play();
+        };
+
+        this.play = function () {
+          this.ulTag.style.position = "relative";
+          var y = 0;
+          var stop = Math.abs(Math.floor(Math.random() * 5));
+          var cnt = 0;
+          var refInterval = setInterval(() => {
+            y -= 10;
+            if (y <= -1000) {
+              y = 0;
+              console.log(cnt, stop);
+              if (cnt >= stop) {
+                clearTimeout(refInterval);
+              }
+              cnt++;
+            }
+            this.ulTag.style.top = y + "px";
+          }, 10);
+        };
+      }
+
+      var gameBox = document.querySelector(".gameBox");
+      new MakeUl(gameBox).init();
+      new MakeUl(gameBox).init();
+      new MakeUl(gameBox).init();
+    </script>
+  </body>
+</html>
+[김찬민] [오후 4:55] 파일: 늑대와 양.py
+[김찬민] [오후 9:31] 동영상
+[김찬민] [오후 9:51] 동영상
+--------------- 2023년 2월 3일 금요일 ---------------
+[김찬민] [오후 4:52] <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>jsDay02Homework.html</title>
+    <style>
+      div.gameBox {
+        border: 1px solid orange;
+        width: 300px;
+        height: 100px;
+        overflow: hidden;
+      }
+      div.gameBox ul {
+        margin: 0;
+        padding: 0px;
+        float: left;
+      }
+      div.gameBox li {
+        width: 100px;
+        height: 100px;
+        border: 1px solid black;
+        list-style: none;
+        box-sizing: border-box;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>햄버거 하우스 게임</h1>
+    <stop><button id="playBtn">Play</button></stop>
+    <div class="gameBox"></div>
+    <button id="stopBtn">정지</button>
+
+    <script>
+      function MakeUl(gameBox) {
+        // 그림 생성 함수
+        this.SIZE = 5;
+        this.init = function () {
+          this.ulTag = document.createElement("ul");
+          ulTag.setAttribute(data-no: ${p}, )
+          p += 1;
+          for (var i = 1; i <= this.SIZE; i++) {
+            var li = document.createElement("li");
+            // 이미지의 랜덤 인덱스를 통해 값을 정함.
+            li.style.backgroundColor = images[i % 5];
+            li.innerText = i;
+            this.ulTag.appendChild(li);
+          }
+          gameBox.appendChild(this.ulTag);
+
+          // 게임 실행
+          // this.play(place);
+          return this;
+        };
+
+        this.play = function () {
+          this.ulTag.style.position = "relative";
+          this.stopFlag = false;
+          var y = 0;
+          var refInterval = setInterval(() => {
+            y += 10;
+            if (this.stopFlag) {
+              // 멈추는 조건
+              if (y % 100 == 0) {
+                clearTimeout(refInterval);
+              }
+            }
+            this.ulTag.style.top = -(y % (this.SIZE * 100)) + "px";
+          }, 10);
+        };
+      }
+
+      var images = ["orange", "blue", "pink", "yellowgreen", "green"];
+      var gameBox = document.querySelector(".gameBox");
+      var ul01 = new MakeUl(gameBox).init();
+      var ul02 = new MakeUl(gameBox).init();
+      var ul03 = new MakeUl(gameBox).init();
+
+      var stopFlag = 0;
+
+      var playBtn = document.getElementById("playBtn");
+      playBtn.addEventListener("click", (event) => {
+        ul01.play();
+        ul02.play();
+        ul03.play();
+      });
+    </script>
+  </body>
+</html>
+[김찬민] [오후 11:38] 동영상
+[김찬민] [오후 11:43] 동영상
+--------------- 2023년 2월 6일 월요일 ---------------
+[김찬민] [오후 12:34] 파일: [18404] 현명한 나이트.py
+[김찬민] [오후 6:20] 파일: DAY04.zip
+[김찬민] [오후 9:39] 동영상
+--------------- 2023년 2월 7일 화요일 ---------------
+[김찬민] [오후 1:06] 파일: [1450] 냅색문제.py
+--------------- 2023년 2월 8일 수요일 ---------------
+[김찬민] [오후 2:03] 파일: [18111] 마인크래프트.py
+--------------- 2023년 2월 9일 목요일 ---------------
+[김찬민] [오후 4:55] 파일: package.json
+[김찬민] [오후 4:55] 파일: package-lock.json
+[김찬민] [오후 4:56] <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FrontEx06SPA</title>
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.13.6/underscore-min.js"
+      integrity="sha512-2V49R8ndaagCOnwmj8QnbT1Gz/rie17UouD9Re5WxbzRVUGoftCu5IuqqtAM9+UC3fwfHCSJR1hkzNQh/2wdtg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script type="text/template" id="carListTmp">
+              <table width="100%" border="1">
+                  <tr>
+                      <th>NO</th>
+                      <th>NAME</th>
+                      <th>PRICE</th>
+                      <th>COMPANY</th>
+                      <th>YEAR</th>
+                      <th>수정</th>
+                      <th>삭제</th>
+                  </tr>
+      <%
+              for(var car of carList) {
+      %>
+                  <tr>
+                      <td><%=car.no %></td>
+                      <td><%=car.name %></td>
+                      <td><%=car.price %></td>
+                      <td><%=car.company %></td>
+                      <td><%=car.year %></td>
+                      <td><button class="modifyBtn" data-no="<%=car.no %>">수정</button></td>
+                      <td><button class="delBtn" data-no="<%=car.no %>">삭제</button></td>
+                  </tr>
+      <%
+              } // end of for
+      %>
+              </table>
+    </script>
+  </head>
+  <body>
+    <h1>중고 차 매매 쇼핑몰</h1>
+    <form id="carForm">
+      <table>
+        <caption>
+          중고 차 정보 입력
+        </caption>
+        <tr>
+          <th>차종</th>
+          <td><input type="text" name="name" value="SORENTO" /></td>
+        </tr>
+        <tr>
+          <th>가격</th>
+          <td><input type="text" name="price" value="4500" /></td>
+        </tr>
+        <tr>
+          <th>회사</th>
+          <td><input type="text" name="company" value="KIA" /></td>
+        </tr>
+        <tr>
+          <th>연식</th>
+          <td><input type="text" name="year" value="2023" /></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td><input type="submit" value="저장" /></td>
+        </tr>
+      </table>
+    </form>
+    <div id="carListBox"></div>
+
+    <script>
+      function drawList(carList) {
+        var complie = _.template($("#carListTmp").html());
+        var html = complie({ carList });
+        $("#carListBox").html(html);
+
+        $("button.modifyBtn").click(function () {
+          console.log("modify no => ", $(this).data("no"));
+        });
+
+        $("button.delBtn").on("click", function () {
+          carList.splice($(this).data("no"), 1);
+          console.log(carList);
+          drawList(carList);
+          console.log("del no => ", $(this).data("no"));
+        });
+      }
+
+      $(document).ready(function () {
+        $.get("/car", function (data, status, xhr) {
+          if (status === "success") {
+            drawList(data);
+          }
+        });
+
+        $("#carForm").on("submit", function (event) {
+          event.preventDefault();
+          var paramData = {
+            name: $(this.name).val(), //this.name.value
+            price: $(this.price).val(),
+            company: $(this.company).val(),
+            year: $(this.year).val(),
+          };
+          console.log(paramData);
+          $.post("/car", paramData, function (data, status, xhr) {
+            drawList(data);
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
+[김찬민] [오후 4:56] 파일: public.7z
+--------------- 2023년 2월 10일 금요일 ---------------
+[김찬민] [오전 12:32] 동영상
+[김찬민] [오전 12:37] 동영상
+[김찬민] [오전 12:55] https://ahnslab.com/sideproject-platform-list/
+[김찬민] [오후 2:59] 파일: 프로젝트 계획서 양식.hwp
+[김찬민] [오후 5:45] ■ 회의록
+- 참석일시 : 2023/02/10
+- 참석자 : 김찬민, 김택준, 이석진, 김도화, 이상원
+- 안건 : 토이 프로젝트 멤버 모집 사이트에 대한 이해
+- 발언자 별 주요 발언
+① 김택준 : 이름이 잘 알려진 사이트가 없어 조사부터 확실히 해야 한다.
+② 이석진 : 토이 프로젝트 멤버 모집 사이트에 대해서 자세한 이해가 필요하다.
+③ 이상원 : 어려운 기술이 있을 수도 있으므로, 사이트의 구성부터 잘 맞춰야 한다. 좋은 배치를 생각해봐야 한다.
+④ 김도화 : 기존 사이트와 다른 추가적인 기능을 넣을 수 있을 것인지 고려 해봐야 한다.
+- 향후 계획 : 여러 토이 프로젝트 멤버 모집 사이트의 구성 및 구현 방법을 조사하고, 그 외의 응용할 수 있는 기술들을 알아본다.
+--------------- 2023년 2월 13일 월요일 ---------------
+[김찬민] [오후 11:24] 동영상
+[김찬민] [오후 11:32] 동영상
+[김찬민] [오후 11:36] 동영상
+--------------- 2023년 2월 16일 목요일 ---------------
+[김찬민] [오후 10:38] 동영상
+--------------- 2023년 2월 17일 금요일 ---------------
+[김찬민] [오후 4:14] 사진
+[김찬민] [오후 4:24] node.js 글 목록 출력하기 주말 과제
+--------------- 2023년 2월 19일 일요일 ---------------
+[김찬민] [오후 9:04] 동영상
+--------------- 2023년 2월 21일 화요일 ---------------
+[김찬민] [오후 5:12] ■ 회의록
+- 참석일시 : 2023/02/22
+- 참석자 : 김찬민
+- 안건 : 프론트 엔드 구성시 필요한 기능이나 추가하고 싶은 기능
+- 발언자 별 주요 발언
+① 김택준 : 랭킹 시스템을 만든다면, 사이트 사용자끼리 경쟁을 하게 하여 지속적으로 사이트에 이용할 수 있게 유도할 수 있을 것이라 생각된다.
+② 이석진 : 네비게이션에 개요나 게시판, 검색 기능, 랭킹등을 구성하여 접근하기 쉽게 한다.
+③ 이상원 : 각각의 화면에 너무 많은 정보를 담지 않고, 깔끔한 디자인으로 구성하는 것이 클라이언트 입장에선 좋을 것 같다.
+④ 김도화 : 채팅 기능을 넣어서 모집하는 사람과 모집하는 프로젝트에 참여할 수 있는 사람간의 커뮤니케이션을 활성화 시킨다.
+- 향후 계획 : 백엔드 구성시 고려해야 할 점을 생각해본다.
+--------------- 2023년 2월 22일 수요일 ---------------
+[김찬민] [오후 4:45] 사용자 추가 기능
+[김찬민] [오후 4:49] ■ 회의록
+- 참석일시 : 2023/02/22
+- 참석자 : 김찬민
+- 안건 : 프론트 엔드 구성시 필요할 것 같은 기능이나 추가하고 싶은 기능
+- 발언자 별 주요 발언
+① 김택준 : 랭킹 시스템을 만든다면, 사이트 사용자끼리 경쟁을 하게 하여 지속적으로 사이트에 이용할 수 있게 유도할 수 있을 것이라 생각된다.
+② 이석진 : 네비게이션에 개요나 게시판, 검색 기능, 랭킹등을 구성하여 접근하기 쉽게 한다.
+③ 이상원 : 각각의 화면에 너무 많은 정보를 담지 않고, 깔끔한 디자인으로 구성하는 것이 클라이언트 입장에선 좋을 것 같다.
+④ 김도화 : 채팅 기능을 넣어서 모집하는 사람과 모집하는 프로젝트에 참여할 수 있는 사람간의 커뮤니케이션을 활성화 시킨다.
+- 향후 계획 : 백엔드 구성시 고려해야 할 점을 생각해본다.
+--------------- 2023년 2월 23일 목요일 ---------------
+[김찬민] [오후 4:54] 파일: 스프링 설치.txt
+--------------- 2023년 2월 24일 금요일 ---------------
+[김찬민] [오후 12:48] ■ 회의록
+- 참석일시 : 2023/03/08
+- 참석자 : 김찬민, 이석진, 이상원, 김도화
+- 안건 : 프로젝트 진행시 전체적으로 고려해야될 사항
+- 발언자 별 주요 발언
+① 이석진 : 디자인(CSS)에 해당하는 부분은 마지막으로 하는 것이 좋을 것 같다.
+② 이상원 : 프론트와 백엔드의 기본 틀을 완성하고 추가적은 부분을 수행해야 할 것이다.
+③ 김도화 : 프론트 엔드와 백엔드를 구성하기 전에 웹의 초안을 그려 해당 부분의 이름이나 수행되는 기능을 정의하는 것이 도움이 될 것 같다.
+④ 김택준 : 하루마다 프로젝트 진행 상황을 각자 보고하는 것이 위험을 줄일 수 있을 것이다.
+
+--------------- 2023년 2월 28일 화요일 ---------------
+[김찬민] [오후 4:53] h2 실행 c > bin > bat > embedded 확인 후 연결
+
+jdbc:h2:~/test
+jdbc:h2:tcp://localhost/~/test
+drop table 테이블명 if exsists saram; saram이 있는 경우 삭제
+
+-- 테이블 삭제
+drop table if exists saram;
+
+-- 테이블 생성
+create table if not exists saram(
+seq bigint not null primary key auto_increment,
+id varchar2(20) not null,
+name varchar2(20),
+age int
+);
+
+-- 데이터 입력
+-- SEQ는 처음 실행 후 없어도 됨
+insert into saram(SEQ, id, name, age) values(1, 'PARK', '박혁거세', 23);
+insert into saram(SEQ, id, name, age) values(2, 'KIM', '김유신', 23);
+insert into saram(SEQ, id, name, age) values(3, 'LEE', '이순신', 23);
+
+select * from saram;
+select * from saram where seq=2;
+
+-- 트랜잭션 (commit, rollback)
+commit;
+
+-- 데이터 수정
+update saram set name='김수한무', age=90 where seq=2;
+
+-- 데이터 삭제 where 안 쓰면 전부 삭제
+DELETE from saram where seq=2; 
+
+> 
+이클립스에서 h2
+window > data source explorer > 하단 Database Connections > new > Generic JDBC(name H2, des(H2 Database)) > 키위 갈라 놓은거 > Add JAR/Zip에서 h2/bin/jar 지정 > Properties(URL : jdbc:h2:tcp://localhost/~/test, Database Name : test, Driver Class : org.h2.Driver, userId : sa) > Test Connection 확인 > finish
++ 껐다 킨 경우 connection 해줘야 함
+>new > other > sql > name:CreateTableBoard.sql, type : Generic JDBC_1.x profile name : H2
+DATABASE name : ""
+> finish
+create table IF NOT EXISTS BOARD (
+SEQ BIGINT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+TITLE VARCHAR2(50) NOT NULL,
+CONTENT VARCHAR2(256),
+WRITEDATE DATE,
+WRITER VARCHAR2(20),
+CNT BIGINT
+);
+
+INSERT INTO BOARD(TITLE, CONTENT, WRITEDATE, WRITER, CNT)
+VALUES('글쓰기 연습','게시판 글쓰기 연습입니다...',NOW(),'관리자',0);
+
+SELECT * FROM BOARD;
+
+COMMIT;
+작성 
+>
+마우스 오른 클릭 후 EXCUTE로 실행 가능
+> org.comstudy.myweb.dbcp, jdbcutil 클래스 생성
+> main 생성
+> class 자동 완성(class<t>에서 <t>는 제거) > Class.forName("");
+> build path > config build path > Libraries의 classpath안에 Add External JARs... 지정했던 jar로 설정 > Apply and close >
+WEB-INF의 lib안에 jar 붙여넣기(web에서 사용)
++ Refrence의 jar(main에서 사용)
+
+>try catch 문으로 사용
+> DriverManager.getConnection(url, user, password) 형태로 생성
+> Connection에서 java.sql형태로 받아와야 함
+> JdbcUtil.java
+public class JdbcUtil {
+   public static Connection getConnection() {
+      // JDBC 연동 - 커넥션 드라이버 찾기
+      String url = "jdbc:h2:tcp://localhost/~/test";
+      String user = "sa";
+      String password = "";
+      Connection conn = null;
+      try {
+         Class.forName("org.h2.Driver"); // 드라이버 검색 -> 인스턴스화
+         conn = DriverManager.getConnection(url, user, password);
+      } catch (ClassNotFoundException e) {
+         System.out.println("드라이버 검색 실패!");
+         e.printStackTrace();
+      } catch (SQLException e) {
+         System.out.println("SQL 오류!");
+         e.printStackTrace();
+      }
+      return conn;
+   }
+
+   // 메소드 오버로딩
+   public static void close(Connection obj) {
+      try {
+         if (obj != null)
+            obj.close();
+      } catch (SQLException e) {
+         e.printStackTrace();
+      }
+   }
+
+   public static void close(ResultSet obj) {
+      try {
+         if (obj != null)
+            obj.close();
+      } catch (SQLException e) {
+         e.printStackTrace();
+      }
+   }
+
+   public static void close(Statement obj) {
+      try {
+         if (obj != null)
+            obj.close();
+      } catch (SQLException e) {
+         e.printStackTrace();
+      }
+   }
+   // static 멤버 = class 멤버 : 클래스 외부에서 객체 생성 없이 클래스 명으로 접근 가능.
+   public void close(Connection conn, Statement stmt, ResultSet rs) {
+      close(rs);
+      close(stmt);
+      close(conn);
+   }
+}
+> testJdbcUtil.jsp 
+<body>
+   <%
+   Connection conn = JdbcUtil.getConnection();
+   out.println(conn);
+   // Connection 객체를 닫아준다.
+   JdbcUtil.close(conn);
+   conn.close();
+   %>
+</body>
+
+import java.sql.*;
+--------------- 2023년 3월 5일 일요일 ---------------
+[김찬민] [오후 6:55] REACT_APP_API_KEY = AIzaSyD1vCmwFHwpTuhObNfsLZmQd_4eC0O-OKg
+REACT_APP_AUTH_DOMAIN = nwitter-35abc.firebaseapp.com
+REACT_APP_PROJECT_ID = nwitter-35abc
+REACT_APP_STORAGE_BUCKET = nwitter-35abc.appspot.com
+REACT_APP_MESSAGING_SENDER_ID = 686330825454
+REACT_APP_APP_ID = 1:686330825454:web:d20506bf569317812f81ff
+--------------- 2023년 4월 5일 수요일 ---------------
+[김찬민] [오후 4:34] 파일: project.zip
+[김찬민] [오후 4:34] 파일: 교안.zip
+[김찬민] [오후 4:34] 파일: 교안2.zip
+--------------- 2023년 4월 12일 수요일 ---------------
+[김찬민] [오후 5:41] 파일: src.7z
+[김찬민] [오후 5:41] 파일: setupProxy.7z
+--------------- 2023년 4월 22일 토요일 ---------------
+[김찬민] [오전 12:43] 파일: 토이프로젝트 멤버 모집 사이트_ppt.pptx
+[김찬민] [오전 12:43] https://jane-aeiou.tistory.com/83
+[김찬민] [오후 8:00] 파일: 토이프로젝트 멤버 모집 사이트_ppt.pptx
+--------------- 2023년 4월 25일 화요일 ---------------
+[김찬민] [오후 1:38] 화수목 11시부터 1시까지
+[김찬민] [오후 2:44] 파일: url_1.csv
+[김찬민] [오후 4:22] Microsoft Teams에서 'KIU SW 2023-1 Phishing URL'에 참가 - Microsoft Teams에서 'KIU SW 2023-1 Phishing URL'에 가입하세요. 다음 링크를 사용하여 앱을 무료로 다운로드하고 커뮤니티에 참가하세요. https://teams.live.com/l/community/FEAeLGYVMIHQ2brMQU
+--------------- 2023년 4월 26일 수요일 ---------------
+[김찬민] [오전 1:11] 딥러닝 프로젝트
+1. 일기 내용 분석, 날씨 사진으로 감정 평가 후 음악 추천을 해주는 사이트
+2. 사용자 분석 기반 여행지 추천 시스템(성격, 현재 기분, 테마(성향)) 사진, 설문지 -> 여행지 추천(기본적인 CNN, DNN같은 것들을 사용)
+3. 약물 분류
+4. 지하철 혼잡도 제공 웹
+[김찬민] [오전 1:13] 감정 분류, 물건 분류, 추천, 환경 분석 ...
+[김찬민] [오전 1:14] Face Painter 팀이나 지하철 혼잡도 제공 웹처럼 지속적인 판별로 사용자에게 기능을 제공해 줄 수 있다.
+[김찬민] [오전 8:20] 파일: Fd_gxLraYAEmO2t.jpeg.jpg
+[김찬민] [오전 8:21] 파일: 2_딥러닝개선_유형2_1_제로 데이 피싱 탐지를 위한 인셉션 스타일 오토인코더 기반 단어문자 수준 URL 이상탐지.pdf
+--------------- 2023년 4월 27일 목요일 ---------------
+[김찬민] [오전 11:45] 파일: AirPassengers.csv
+[김찬민] [오전 11:49] 파일: BTCUSDT_1m_20180501_20211221.csv
+--------------- 2023년 5월 3일 수요일 ---------------
+[김찬민] [오후 7:07] 테스트 하겠슴니다
+[김찬민] [오후 7:07] test
+[김찬민] [오후 7:07] test
+[김찬민] [오후 7:07] test
+[김찬민] [오후 7:07] test
+[김찬민] [오후 7:07] test!
