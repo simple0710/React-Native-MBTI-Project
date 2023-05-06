@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity, Dimensions } from "react-native";
 import DocumentPicker from "react-native-document-picker";
 import axios from "axios";
+import text from "./styles/text-s";
+import button from "./styles/button-s";
 
 function HomeScreen({ navigation }) {
   const [testValue, setTestValue] = useState("");
@@ -98,7 +100,6 @@ function HomeScreen({ navigation }) {
         <View style={styles.maincontainer}>
           {/* 파일 업로드 */}
           <TouchableOpacity
-            title="File Upload"
             onPress={pickFile}
             style={StyleSheet.compose(styles.button, button.upload)}
           >
@@ -134,25 +135,22 @@ function HomeScreen({ navigation }) {
 // css
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     alignItems: "center",
     justifyContent: "center",
     textAlign: "center",
     height: "100%",
   },
   maincontainer: {
-    flex: 10,
     // margin: "auto",
     alignItems: "center",
     justifyContent: "center",
     textAlign: "center",
   },
   title: {
-    flex: 1,
+    marginBottom: 250,
     textAlign: "center",
-    fontSize: 24,
+    fontSize: 50,
     fontWeight: "bold",
-    marginBottom: 10,
   },
   button: {
     borderRadius: 8,
@@ -166,32 +164,6 @@ const view = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     textAlign: "center",
-  },
-});
-
-const text = StyleSheet.create({
-  upload: {
-    flex: 1,
-    textAlign: "center",
-    fontSize: 16,
-    fontWeight: "bold",
-  },
-  check: {
-    flex: 1,
-  },
-});
-const button = StyleSheet.create({
-  upload: {
-    height: 55,
-    width: 160,
-    backgroundColor: "#9191E9",
-  },
-  check: {
-    marginTop: 20,
-    height: 40,
-    width: 110,
-
-    backgroundColor: "#C7DBFB",
   },
 });
 

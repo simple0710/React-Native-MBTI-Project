@@ -6,16 +6,17 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import HomeScreen from "./HomeScreen";
 import ResultScreen from "./ResultScreen";
+import main from "./styles/main-s";
 
 const Stack = createNativeStackNavigator();
 
 function App() {
   return (
     <>
-      <NavigationContainer>
-        <View>
+      <NavigationContainer style={main.container}>
+        {/* <View >
           <Text>Logo</Text>
-        </View>
+        </View> */}
         <Stack.Navigator initialRouteName="Login">
           <Stack.Screen
             name="Home"
@@ -28,19 +29,9 @@ function App() {
             options={{ headerShown: false }}
           />
         </Stack.Navigator>
-        <View>
-          <Text>footer</Text>
-        </View>
       </NavigationContainer>
     </>
   );
 }
-const styles = StyleSheet.create({
-  container: {
-    alignItems: "center",
-    justifyContent: "center",
-    textAlign: "center",
-  },
-});
 
 export default App;
