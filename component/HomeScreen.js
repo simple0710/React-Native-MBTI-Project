@@ -80,7 +80,7 @@ function HomeScreen({ navigation }) {
           })
           .then((res) => {
             setMbtiResult(res.data);
-            navigation.navigate("Result"); // 화면 이동
+            navigation.navigate("Result", {data : res.data}); // 화면 이동
           })
           .catch((err) => {
             console.log(err);
@@ -159,12 +159,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
 });
-const view = StyleSheet.create({
-  container: {
-    alignItems: "center",
-    justifyContent: "center",
-    textAlign: "center",
-  },
-});
+
 
 export default HomeScreen;

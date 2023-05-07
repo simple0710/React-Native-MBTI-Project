@@ -11,6 +11,7 @@ import main from "./styles/main-s";
 const Stack = createNativeStackNavigator();
 
 function App() {
+  // 파일 업로드 txt 정보
   return (
     <>
       <NavigationContainer style={main.container}>
