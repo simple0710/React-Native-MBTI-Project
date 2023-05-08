@@ -1,9 +1,18 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View, TouchableOpacity, Dimensions } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  Dimensions,
+  SafeAreaView,
+} from "react-native";
 import DocumentPicker from "react-native-document-picker";
 import axios from "axios";
+import main from "./styles/main-s";
 import text from "./styles/text-s";
 import button from "./styles/button-s";
+import area from "./styles/area-s";
 
 function HomeScreen({ navigation }) {
   const [testValue, setTestValue] = useState("");
@@ -33,6 +42,8 @@ function HomeScreen({ navigation }) {
       if (DocumentPicker.isCancel(err)) {
         // 사용자가 파일 선택을 취소한 경우
         console.log("Canceled");
+        setUri("");
+        setFileTitle("");
       } else {
         // 에러 처리
         console.log(err);
@@ -71,7 +82,6 @@ function HomeScreen({ navigation }) {
           type: "text/plain",
           name: fileTitle,
         });
-        console.log(formData);
         await axios
           .post("http://10.0.2.2:8080/upload", formData, {
             headers: {
@@ -80,7 +90,8 @@ function HomeScreen({ navigation }) {
           })
           .then((res) => {
             setMbtiResult(res.data);
-            navigation.navigate("Result", {data : res.data}); // 화면 이동
+            console.log("전달할 값", mbtiResult);
+            navigation.navigate("Result", { data: mbtiResult, items: "ok" }); // 화면 이동
           })
           .catch((err) => {
             console.log(err);
@@ -93,15 +104,17 @@ function HomeScreen({ navigation }) {
   return (
     // <View style={styles.container}>
     <>
-      <View style={styles.container}>
+      <SafeAreaView style={area.h10}>
         {/* Logo */}
-        <Text style={styles.title}>Logo</Text>
+        <View style={main.header}>
+          <Text style={text.title}>Logo</Text>
+        </View>
         {/* Main */}
-        <View style={styles.maincontainer}>
+        <View style={main.main}>
           {/* 파일 업로드 */}
           <TouchableOpacity
             onPress={pickFile}
-            style={StyleSheet.compose(styles.button, button.upload)}
+            style={StyleSheet.compose(button.button, button.upload)}
           >
             <Text style={text.upload}>File Upload</Text>
           </TouchableOpacity>
@@ -110,7 +123,7 @@ function HomeScreen({ navigation }) {
           {/* MBTI 검사 */}
           <TouchableOpacity
             onPress={getMbtiResult}
-            style={StyleSheet.compose(styles.button, button.check)}
+            style={StyleSheet.compose(button.button, button.check)}
           >
             <Text style={text.upload}>Check</Text>
           </TouchableOpacity>
@@ -124,41 +137,20 @@ function HomeScreen({ navigation }) {
             <Text>화면 이동 테스트</Text>
           </TouchableOpacity>
         </View>
-        <Text>Made by BootStrap</Text>
-        {/* <Text>약관</Text>
-        <Text>약관</Text>  */}
-      </View>
+        <View style={main.footer}>
+          <Text style={text.footer}>약관</Text>
+          <Text style={text.footer}>Made by BootStrap</Text>
+        </View>
+      </SafeAreaView>
     </>
   );
 }
 
-// css
 const styles = StyleSheet.create({
-  container: {
-    alignItems: "center",
-    justifyContent: "center",
+  test: {
+    // flex: 1,
     textAlign: "center",
-    height: "100%",
-  },
-  maincontainer: {
-    // margin: "auto",
-    alignItems: "center",
-    justifyContent: "center",
-    textAlign: "center",
-  },
-  title: {
-    marginBottom: 250,
-    textAlign: "center",
-    fontSize: 50,
-    fontWeight: "bold",
-  },
-  button: {
-    borderRadius: 8,
-    // 중앙 정렬
-    alignItems: "center",
-    flexDirection: "row",
+    backgroundColor: "#CCCCCC",
   },
 });
-
-
 export default HomeScreen;
