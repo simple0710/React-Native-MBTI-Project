@@ -37,6 +37,36 @@ app.post("/result", upload.single("file"), async (req, res) => {
 app.post("/upload", upload.single("file"), (req, res) => {
   const { originalname, path } = req.file;
   const newPath = `uploads/${originalname}`;
+
+  const MBTIData = [
+    {
+      name: "김찬민",
+      labels: ["INFP", "ISFP", "INTP", "ESFP", "ENTP", "ENTJ", "INTP"],
+      datasets: [
+        {
+          data: [70, 10, 5, 5, 5, 4, 1],
+        },
+      ],
+    },
+    {
+      name: "김찬민 2",
+      labels: ["ISFP", "INFP", "INTP", "ESFP", "ENTP", "ENTJ", "INTP"],
+      datasets: [
+        {
+          data: [60, 10, 5, 5, 5, 4, 1],
+        },
+      ],
+    },
+    {
+      name: "김찬민 3",
+      labels: ["ISFP", "INFP", "INTP", "ESFP", "ENTP", "ENTJ", "INTP"],
+      datasets: [
+        {
+          data: [50, 10, 5, 5, 5, 4, 1],
+        },
+      ],
+    },
+  ];
   console.log(path);
   console.log(newPath);
   fs.rename(path, newPath, (err) => {
@@ -53,9 +83,11 @@ app.post("/upload", upload.single("file"), (req, res) => {
           res.sendStatus(500);
         } else {
           console.log(data.toString());
+          // 모델에 카톡 내용 추가 후 MBTI 결과 반환
+          // JSON 형태로 전달
+          res.send(MBTIData);
         }
       });
-      res.sendStatus(200);
     }
   });
 });

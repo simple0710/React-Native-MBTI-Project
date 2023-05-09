@@ -1,22 +1,14 @@
+// ResultScreen.js
 import React, { useState, useEffect } from "react";
-import {
-  StyleSheet,
-  Text,
-  Dimensions,
-  TouchableOpacity,
-  SafeAreaView,
-  FlatList,
-  View,
-} from "react-native";
-import { BarChart, Chart } from "react-native-chart-kit";
-import main from "./styles/main-s";
-import text from "./styles/text-s";
-import button from "./styles/button-s";
-import area from "./styles/area-s";
+import { Text, TouchableOpacity, FlatList, View } from "react-native";
+import { BarChart } from "react-native-chart-kit";
+// css
+import styles from "./styles/result_css";
 
-function ResultScreen({ route }) {
+function ResultScreen({ route, navigation }) {
   // MBTI 데이터이 길이를 구해 해당 값으로 값을 한다.
   const [viewFlag, setViewFlag] = useState([true, true, true]);
+  const [mbtiData, setMbtiData] = useState("");
 
   // 토글 기능 수행
   const handleViewItem = (index) => {
@@ -28,7 +20,7 @@ function ResultScreen({ route }) {
 
   // BarChart 설정
   const chartConfig = {
-    backgroundGradientFrom: "#ffffff",
+    backgroundGradientFrom: "white",
     backgroundGradientTo: "#ffffff",
     // backgroundGradient: "white",
     decimalPlaces: 0, // 소수점 자릿수
@@ -36,61 +28,6 @@ function ResultScreen({ route }) {
     labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`, // 라벨 텍스트 색상
     strokeWidth: 2, // 막대 두께
     barPercentage: 0.5, // 막대 너비
-    withHorizontalLabels: false,
-  };
-
-  // 받을 값 data
-  const MBTIData = [
-    {
-      name: "김찬민",
-      labels: ["INFP", "ISFP", "INTP", "ESFP", "ENTP", "ENTJ", "INTP"],
-      datasets: [
-        {
-          data: [70, 10, 5, 5, 5, 4, 1],
-        },
-      ],
-    },
-    {
-      name: "김찬민 2",
-      labels: ["ISFP", "INFP", "INTP", "ESFP", "ENTP", "ENTJ", "INTP"],
-      datasets: [
-        {
-          data: [60, 10, 5, 5, 5, 4, 1],
-        },
-      ],
-    },
-    {
-      name: "김찬민 3",
-      labels: ["ISFP", "INFP", "INTP", "ESFP", "ENTP", "ENTJ", "INTP"],
-      datasets: [
-        {
-          data: [50, 10, 5, 5, 5, 4, 1],
-        },
-      ],
-    },
-  ];
-  // 리스트 Header, 새로운 컴포넌트를 생성해서 만들어도 됨
-  const MBTIListHeder = () => {
-    return (
-      <>
-        <View style={main.header}>
-          <Text style={text.title}>Logo</Text>
-          <Text style={StyleSheet.compose(text.upload, button.result)}>
-            result
-          </Text>
-        </View>
-      </>
-    );
-  };
-
-  const MBTIListFooter = () => {
-    return (
-      <>
-        <View>
-          <Text>공유하기</Text>
-        </View>
-      </>
-    );
   };
 
   const MBTIResultList = (items, index) => {
@@ -102,47 +39,97 @@ function ResultScreen({ route }) {
           }}
         >
           {viewFlag[index] ? (
-            <Text style={text.toggle_word} key={index}>
+            <Text style={styles.toggle_word} key={index}>
               ▼ {items.name}님의 결과
             </Text>
           ) : (
-            <Text style={text.toggle_word} key={index}>
+            <Text style={styles.toggle_word} key={index}>
               ▶ {items.name}님의 결과
             </Text>
           )}
         </TouchableOpacity>
         {viewFlag[index] && (
-          <BarChart
-            data={items}
-            width={Dimensions.get("window").width}
-            height={250}
-            chartConfig={chartConfig}
-            fromZero={true} // 0부터 시작
-            showBarTops={false} // 더 잘 보이게 하는 바 삭제
-            showValuesOnTopOfBars={true} // 그래프 상단 퍼센트 표시
-            // withInnerLines= {false} // 점선 삭제
-            // withHorizontalLabels={false} // y 라벨 숨기기
-          />
+          <View style={styles.container}>
+            <View style={styles.graph_container}>
+              <BarChart
+                // data={data}
+                // height={220}
+                // width={400}
+                // chartConfig={chartConfig}
+                data={items}
+                width={400} // 그래프 사이 간격
+                height={220}
+                chartConfig={chartConfig}
+                fromZero={true} // 0부터 시작
+                showBarTops={false} // 더 잘 보이게 하는 바 삭제
+                showValuesOnTopOfBars={true} // 그래프 상단 퍼센트 표시
+                // withInnerLines={false} // 점선 삭제
+                // yLabelsOffset={"   "}
+                yAxisSuffix=" %"
+                // withHorizontalLabels={false} // y 라벨 숨기기
+              />
+            </View>
+          </View>
         )}
       </>
     );
   };
+  const data = {
+    labels: ["January", "February", "March", "April", "May", "June"],
+    datasets: [
+      {
+        data: [20, 45, 28, 80, 99, 43],
+      },
+    ],
+  };
   useEffect(() => {
     // setViewFlag([... viewFlag])
-    console.log("받은 데이터", route);
+    if (route.params) {
+      console.log("받은 데이터", route.params.data);
+      setMbtiData(route.params.data);
+      route.params.data.forEach((element) => {
+        console.log(element);
+      });
+    }
   }, []);
   return (
     <>
-      <SafeAreaView>
-        <FlatList
-          styles={area.h10}
-          data={MBTIData}
-          renderItem={({ item, index }) => MBTIResultList(item, index)}
-          // keyExtractor={(item, index) => index.toString()}
-          ListHeaderComponent={MBTIListHeder}
-          ListFooterComponent={MBTIListFooter}
-        />
-      </SafeAreaView>
+      {mbtiData ? (
+        <>
+          <View style={styles.container}>
+            <FlatList
+              ListHeaderComponentStyle={styles.container}
+              data={mbtiData}
+              renderItem={({ item, index }) => MBTIResultList(item, index)}
+              ListHeaderComponent={
+                <View style={styles.result_container}>
+                  <Text style={styles.result_text}>Result</Text>
+                </View>
+              }
+              ListFooterComponent={
+                <View style={styles.sub_container}>
+                  <TouchableOpacity style={styles.sub_button}>
+                    <Text style={styles.sub_text}>Share</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    style={styles.sub_button}
+                    onPress={() => {
+                      navigation.navigate("Home");
+                    }}
+                  >
+                    <Text style={styles.sub_text}>뒤로가기</Text>
+                  </TouchableOpacity>
+                </View>
+              }
+              // keyExtractor={(item, index) => index.toString()}
+            />
+          </View>
+        </>
+      ) : (
+        <View>
+          <Text>값이 없습니다.</Text>
+        </View>
+      )}
     </>
   );
 }
