@@ -48,6 +48,7 @@ const result_css = StyleSheet.create({
     // width: "70%",
     // paddingRight: 30,
     // alignItems: "center",
+    // marginBottom: 10,
   },
 
   // Share and return Styles

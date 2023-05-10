@@ -32,6 +32,8 @@ const app_css = StyleSheet.create({
     flex: 0.05,
     textAlign: "center",
     backgroundColor: "#CCCCCC",
+    borderTopColor: "black",
+
     alignItems: "center",
   },
   footer_text: {

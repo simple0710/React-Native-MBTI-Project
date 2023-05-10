@@ -7,17 +7,21 @@ import styles from "./styles/result_css";
 
 function ResultScreen({ route, navigation }) {
   // MBTI 데이터이 길이를 구해 해당 값으로 값을 한다.
-  const [viewFlag, setViewFlag] = useState([true, true, true]);
+  const [viewFlag, setViewFlag] = useState([]);
+  const flagInsert = (dataLen) => {
+    for (let i = 0; i < dataLen; i++) {
+      const True = true;
+      setViewFlag((state) => [...state, True]);
+    }
+  };
   const [mbtiData, setMbtiData] = useState("");
-
   // 토글 기능 수행
   const handleViewItem = (index) => {
     let flagCopy = [...viewFlag];
     flagCopy[index] = !flagCopy[index];
     setViewFlag(flagCopy);
-    // setViewFlag[index](!viewFlag[index]);
   };
-
+  const data = [];
   // BarChart 설정
   const chartConfig = {
     backgroundGradientFrom: "white",
@@ -52,10 +56,6 @@ function ResultScreen({ route, navigation }) {
           <View style={styles.container}>
             <View style={styles.graph_container}>
               <BarChart
-                // data={data}
-                // height={220}
-                // width={400}
-                // chartConfig={chartConfig}
                 data={items}
                 width={400} // 그래프 사이 간격
                 height={220}
@@ -74,22 +74,14 @@ function ResultScreen({ route, navigation }) {
       </>
     );
   };
-  const data = {
-    labels: ["January", "February", "March", "April", "May", "June"],
-    datasets: [
-      {
-        data: [20, 45, 28, 80, 99, 43],
-      },
-    ],
-  };
+
   useEffect(() => {
-    // setViewFlag([... viewFlag])
-    if (route.params) {
-      console.log("받은 데이터", route.params.data);
-      setMbtiData(route.params.data);
-      route.params.data.forEach((element) => {
-        console.log(element);
-      });
+    setViewFlag([]);
+    if (route && route.params && route.params.data) {
+      const paramsData = route.params.data;
+      const listLength = paramsData.length;
+      flagInsert(listLength);
+      setMbtiData(paramsData);
     }
   }, []);
   return (
