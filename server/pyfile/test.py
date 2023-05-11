@@ -1,8 +1,9 @@
+# -*- coding: utf-8 -*-
+
 import sys
 
 import requests
 
-# 한->영 함수
 def translate_text(text, source_language='ko', target_language='en'):
     url = 'https://translate.googleapis.com/translate_a/single?client=gtx&sl={}&tl={}&dt=t&q={}'
     response = requests.get(url.format(source_language, target_language, text)).json()
