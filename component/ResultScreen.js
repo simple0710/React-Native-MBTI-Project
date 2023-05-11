@@ -29,9 +29,10 @@ function ResultScreen({ route, navigation }) {
     try {
       const uri = await viewRef.current.capture();
       const shareOptions = {
-        title: "Share via",
+        title: "test",
         message: "Some message",
         url: uri,
+        type: 'image/jpeg',
       };
       await Share.open(shareOptions);
     } catch (error) {
@@ -90,6 +91,7 @@ function ResultScreen({ route, navigation }) {
     strokeWidth: 2, // 막대 두께
     barPercentage: 0.5, // 막대 너비
   };
+
   useEffect(() => {
     setViewFlag([]);
     if (route && route.params && route.params.data) {
@@ -103,19 +105,25 @@ function ResultScreen({ route, navigation }) {
     <>
       {mbtiData ? (
         <>
-          <View style={styles.container}>
+          <ViewShot style={styles.container} ref={viewRef} options={{ format: 'png', quality: 0.9 }}>
+
             <FlatList
               ListHeaderComponentStyle={styles.container}
               data={mbtiData}
-              renderItem={({ item, index }) => MBTIResultList(item, index)}
+              renderItem={({ item, index }) => (
+                  MBTIResultList(item, index)
+              )}
               ListHeaderComponent={
+                <>
                 <View style={styles.result_container}>
                   <Text style={styles.result_text}>Result</Text>
                 </View>
+                </>
               }
               ListFooterComponent={
                 <View style={styles.sub_container}>
-                  <TouchableOpacity style={styles.sub_button}>
+                  <TouchableOpacity style={styles.sub_button} onPress={onCapture}>
+                  
                     <Text style={styles.sub_text}>Share</Text>
                   </TouchableOpacity>
                   <TouchableOpacity
@@ -130,13 +138,14 @@ function ResultScreen({ route, navigation }) {
               }
               // keyExtractor={(item, index) => index.toString()}
             />
-          </View>
+            </ViewShot>
         </>
       ) : (
-        <View>
-          <ViewShot ref={viewRef}>
+        <>
+          <ViewShot style={styles.container} ref={viewRef} options={{ format: 'jpg', quality: 0.9 }}>
             {/* 내용 */}
-            <Text>안녕</Text>
+
+            <Text >안녕</Text>
             <Text>안녕</Text>
             <Text>안녕</Text>
             <Text>안녕</Text>
@@ -151,7 +160,7 @@ function ResultScreen({ route, navigation }) {
             <Text>안녕</Text>
           </ViewShot>
           <Button title="공유" onPress={onCapture} />
-        </View>
+        </>
       )}
     </>
   );
