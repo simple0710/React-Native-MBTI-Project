@@ -34,7 +34,7 @@ async function loadModel(filePath) {
 }
 async function testpy(text) {
   const input = text;
-  const pyPath = "./pyfile/test.py";
+  const pyPath = "pyfile/test.py";
   exec(
     `python ${pyPath} ${input}`,
     { encoding: "utf-8" },
