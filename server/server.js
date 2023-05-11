@@ -16,6 +16,9 @@ app.use(cors());
 const tf = require("@tensorflow/tfjs-node");
 const path = require("path");
 
+// 파이썬 스크립트
+const { exec } = require("child_process");
+
 async function loadModel(filePath) {
   const modelPath = path.join(__dirname, "model/target_model/", "model.json");
   // const model = await tf.node.loadSavedModel(`file://${modelPath}`);
@@ -29,16 +32,21 @@ async function loadModel(filePath) {
   predictions.print();
   return predictions;
 }
-// async function loadModel(filePath) {
-//   console.log("filePaht fsdfsdlkfj", filePath);
-//   const modelPath = path.join(__dirname, "model/target_model/", "model.json");
-//   const model = await tf.loadLayersModel(`file://${modelPath}`);
-//   const text = fs.readFile(filePath);
-//   const input = tf.tensor([filePath]); // 1개의 텍스트 파일에 대해 1개의 예측 결과를 출력하기 때문에 shape를 [1, 1]로 지정합니다.
-//   const predictions = model.predict(input);
-//   predictions.print();
-//   return predictions;
-// }
+async function testpy(text) {
+  const input = text;
+  const pyPath = path.join(__dirname, "test.py");
+  exec(
+    `python ${pyPath} ${input}`,
+    { encoding: "utf-8" },
+    (error, stdout, stderr) => {
+      if (error) {
+        console.error(`Error: ${error}`);
+        return;
+      }
+      console.log(`Output: ${stdout}`);
+    }
+  );
+}
 
 app.listen(8080, () => {
   console.log("listening on 8080");
@@ -47,10 +55,6 @@ app.listen(8080, () => {
 // 확인
 app.get("/test", (req, res) => {
   console.log("test ok");
-  res.send("test ok");
-});
-
-app.post("/test", (req, res) => {
   res.send("test ok");
 });
 
@@ -116,7 +120,6 @@ app.post("/upload", upload.single("file"), (req, res) => {
     } else {
       console.log("File uploaded successfully");
       const filePath = "uploads/" + req.file.originalname;
-      console.log(filePath);
       // 데이터 저장
       fs.readFile(filePath, "utf-8", (err, data) => {
         if (err) {
@@ -128,8 +131,17 @@ app.post("/upload", upload.single("file"), (req, res) => {
           // JSON 형태로 전달
           // 모델 예측
           // console.log(output);
-          loadModel(filePath);
-          res.send(MBTIData);
+          // loadModel(filePath);
+          const test = "안녕하세요";
+          testpy(test);
+          fs.unlink(filePath, (err) => {
+            if (err) {
+              console.log(err);
+              res.sendStatus(500);
+            } else {
+              res.send(MBTIData);
+            }
+          });
         }
       });
     }

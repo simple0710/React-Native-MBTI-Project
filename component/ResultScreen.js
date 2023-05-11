@@ -1,7 +1,10 @@
 // ResultScreen.js
-import React, { useState, useEffect } from "react";
-import { Text, TouchableOpacity, FlatList, View } from "react-native";
+import React, { useState, useEffect, useRef } from "react";
+import { Text, TouchableOpacity, FlatList, View, Button } from "react-native";
 import { BarChart } from "react-native-chart-kit";
+import ViewShot from "react-native-view-shot";
+import Share from "react-native-share";
+
 // css
 import styles from "./styles/result_css";
 
@@ -21,19 +24,21 @@ function ResultScreen({ route, navigation }) {
     flagCopy[index] = !flagCopy[index];
     setViewFlag(flagCopy);
   };
-  const data = [];
-  // BarChart 설정
-  const chartConfig = {
-    backgroundGradientFrom: "white",
-    backgroundGradientTo: "#ffffff",
-    // backgroundGradient: "white",
-    decimalPlaces: 0, // 소수점 자릿수
-    color: (opacity = 1) => `rgba(26, 147, 111, ${opacity})`, // 막대 색상
-    labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`, // 라벨 텍스트 색상
-    strokeWidth: 2, // 막대 두께
-    barPercentage: 0.5, // 막대 너비
-  };
+  const viewRef = useRef();
 
+  const onCapture = async () => {
+    try {
+      const uri = await viewRef.current.capture();
+      const shareOptions = {
+        title: "Share via",
+        message: "Some message",
+        url: uri,
+      };
+      await Share.open(shareOptions);
+    } catch (error) {
+      console.error(error);
+    }
+  };
   const MBTIResultList = (items, index) => {
     return (
       <>
@@ -75,6 +80,17 @@ function ResultScreen({ route, navigation }) {
     );
   };
 
+  // BarChart 설정
+  const chartConfig = {
+    backgroundGradientFrom: "white",
+    backgroundGradientTo: "#ffffff",
+    // backgroundGradient: "white",
+    decimalPlaces: 0, // 소수점 자릿수
+    color: (opacity = 1) => `rgba(26, 147, 111, ${opacity})`, // 막대 색상
+    labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`, // 라벨 텍스트 색상
+    strokeWidth: 2, // 막대 두께
+    barPercentage: 0.5, // 막대 너비
+  };
   useEffect(() => {
     setViewFlag([]);
     if (route && route.params && route.params.data) {
@@ -119,7 +135,23 @@ function ResultScreen({ route, navigation }) {
         </>
       ) : (
         <View>
-          <Text>값이 없습니다.</Text>
+          <ViewShot ref={viewRef}>
+            {/* 내용 */}
+            <Text>안녕</Text>
+            <Text>안녕</Text>
+            <Text>안녕</Text>
+            <Text>안녕</Text>
+            <Text>안녕</Text>
+            <Text>안녕</Text>
+            <Text>안녕</Text>
+            <Text>안녕</Text>
+            <Text>안녕</Text>
+            <Text>안녕</Text>
+            <Text>안녕</Text>
+            <Text>안녕</Text>
+            <Text>안녕</Text>
+          </ViewShot>
+          <Button title="공유" onPress={onCapture} />
         </View>
       )}
     </>

@@ -8,7 +8,6 @@ import HomeScreen from "./HomeScreen";
 import ResultScreen from "./ResultScreen";
 // css
 import styles from "./styles/app_css";
-
 function App() {
   const Stack = createNativeStackNavigator();
   return (
