@@ -10,7 +10,7 @@ def translate_text(text, source_language='ko', target_language='en'):
     try:
         translation = response[0][0][0]
     except (IndexError, TypeError):
-        print(f"Translation failed for text: {text}")
+        # print(f"Translation failed for text: {text}")
         translation = ""
     return translation
 
