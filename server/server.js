@@ -17,9 +17,9 @@ const tf = require("@tensorflow/tfjs-node");
 const path = require("path");
 
 // 파이썬 스크립트
-const { exec } = require("child_process");
-const { execSync } = require("child_process");
-execSync("python -m pip install requests");
+// const { exec } = require("child_process");
+// const { execSync } = require("child_process");
+// execSync("python -m pip install requests");
 
 async function loadModel(filePath) {
   const modelPath = path.join(__dirname, "model/target_model/", "model.json");
