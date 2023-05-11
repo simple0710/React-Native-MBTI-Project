@@ -1,5 +1,5 @@
+# -*- coding: utf-8 -*-
 import sys
-
 import requests
 
 def translate_text(text, source_language='ko', target_language='en'):

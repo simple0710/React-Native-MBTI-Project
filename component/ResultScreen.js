@@ -4,7 +4,6 @@ import { Text, TouchableOpacity, FlatList, View, Button } from "react-native";
 import { BarChart } from "react-native-chart-kit";
 import ViewShot from "react-native-view-shot";
 import Share from "react-native-share";
-
 // css
 import styles from "./styles/result_css";
 
