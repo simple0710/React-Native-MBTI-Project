@@ -32,6 +32,7 @@ async function loadModel(filePath) {
   predictions.print();
   return predictions;
 }
+
 async function testpy(text) {
   const input = text;
   const pyPath = "pyfile/test.py";
