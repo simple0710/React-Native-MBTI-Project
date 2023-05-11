@@ -113,6 +113,7 @@ app.post("/upload", upload.single("file"), (req, res) => {
   ];
   console.log(path);
   console.log(newPath);
+  console.log(__dirname);
   fs.rename(path, newPath, (err) => {
     if (err) {
       console.error(err);
