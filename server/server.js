@@ -55,6 +55,16 @@ app.listen(8080, () => {
 // 확인
 app.get("/test", (req, res) => {
   console.log("test ok");
+  fs.readdir("./", (err, files) => {
+    if (err) {
+      console.error("Error reading directory:", err);
+      return;
+    }
+
+    files.forEach((file) => {
+      console.log(file);
+    });
+  });
   res.send("test ok");
 });
 
