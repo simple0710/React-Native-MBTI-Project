@@ -34,7 +34,7 @@ async function loadModel(filePath) {
 }
 async function testpy(text) {
   const input = text;
-  const pyPath = path.join(__dirname, "test.py");
+  const pyPath = "./pyfile/test.py";
   exec(
     `python ${pyPath} ${input}`,
     { encoding: "utf-8" },
@@ -55,17 +55,17 @@ app.listen(8080, () => {
 // 확인
 app.get("/test", (req, res) => {
   console.log("test ok");
-  console.log(__dirname);
-  fs.readdir("./", (err, files) => {
-    if (err) {
-      console.error("Error reading directory:", err);
-      return;
-    }
+  // 파일 위치 파악
+  // fs.readdir("./", (err, files) => {
+  //   if (err) {
+  //     console.error("Error reading directory:", err);
+  //     return;
+  //   }
 
-    files.forEach((file) => {
-      console.log(file);
-    });
-  });
+  //   files.forEach((file) => {
+  //     console.log(file);
+  //   });
+  // });
   res.send("test ok");
 });
 
