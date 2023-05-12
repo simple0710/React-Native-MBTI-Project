@@ -14,7 +14,8 @@ function HomeScreen({ navigation }) {
   const [uri, setUri] = useState("");
   const [loading, setLoading] = useState("");
   const api =
-    "https://port-0-react-native-mbti-project-lme62alhih8uuf.sel4.cloudtype.app";
+    // "https://port-0-react-native-mbti-project-lme62alhih8uuf.sel4.cloudtype.app";
+    "http://10.0.2.2:8080";
   const pickFile = async () => {
     try {
       console.log("Picking file");

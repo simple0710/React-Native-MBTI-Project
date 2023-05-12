@@ -23,7 +23,7 @@ async function loadModel(filePath) {
   const modelPath = path.join(__dirname, "model/target_model/", "model.json");
   // const model = await tf.node.loadSavedModel(`file://${modelPath}`);
   const model = await tf.loadLayersModel(`file://${modelPath}`);
-  console.log(model);
+  // console.log(model);
   const text = fs.readFileSync(filePath, "utf-8");
   const input = tf.tensor(text.split(""), [1, text.length]); //
   // console.log(text);
@@ -70,19 +70,8 @@ app.get("/test", (req, res) => {
   res.send("test ok");
 });
 
-// MBTI 모델 수행 후 결과 반환
-app.post("/result", upload.single("file"), async (req, res) => {
-  console.log("result ok");
-  const fileContent = await fs.promises.readFile(req.file.path, "utf-8");
-  // console.log(fileContent);
-  const requestBody = req.body;
-  // console.log(req.file);
-  requestBody.fileContent = fileContent;
-  // console.log(requestBody);
-  res.send("File uploaded successfully");
-});
-
 app.post("/upload", upload.single("file"), (req, res) => {
+  console.log("in");
   const { originalname, path } = req.file;
   const newPath = `uploads/${originalname}`;
   const MBTIData = [
@@ -146,12 +135,15 @@ app.post("/upload", upload.single("file"), (req, res) => {
           // console.log(output);
           // loadModel(filePath);
           const test = "안녕하세요";
-          testpy(test);
+          console.log(filePath);
+          console.log(testpy(filePath)); // 전처리 및 모델 가져오기
+          // text = testpy(test); // 전처리 코드
           fs.unlink(filePath, (err) => {
             if (err) {
               console.log(err);
               res.sendStatus(500);
             } else {
+              // loadModel();
               res.send(MBTIData);
             }
           });
