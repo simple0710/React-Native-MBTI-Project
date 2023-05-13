@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 import sys
+import json
 import re
-import nltk 
-import numpy as np # done
-import pandas as pd 
+import nltk
+import pickle5 as pickle
+import numpy as np
+import pandas as pd
 import requests
-# import pickle5 as pickle
-
 from nltk.corpus import stopwords
 nltk.download('stopwords')
 from itertools import groupby
@@ -18,20 +18,22 @@ from tensorflow.keras.models import load_model, Model
 from tensorflow.keras.layers import Embedding, Dense, Flatten, LSTM, GRU, GlobalAveragePooling1D, Bidirectional, Dropout, BatchNormalization, Input, Conv2D, MaxPool2D, Reshape
 from tensorflow.keras.callbacks import EarlyStopping
 from sklearn.model_selection import train_test_split
+import os
 
 # load label, tokenizer with max_len, and models
 label_dict = {'istj': 0, 'isfj': 1, 'infj': 2, 'intj': 3, 'istp': 4, 'isfp': 5, 'infp': 6, 'intp': 7,
               'estp': 8, 'esfp': 9, 'enfp': 10, 'entp': 11, 'estj': 12, 'esfj': 13, 'enfj': 14, 'entj': 15}
-with open('./models/tokenizer.pickle', 'rb') as handle:
-    # tokenizer = pickle.load(handle)
-    tokenizer = handle
-
+# print("modir : ",os.listdir(os.getcwd()))
+with open('model/tokenizer.pickle', 'rb') as handle:
+    tokenizer = pickle.load(handle)
 max_len = 4491
 word_index = tokenizer.word_index
-model = load_model('./models/model_conv_net.h5')
-model.summary()
+model = load_model('model/model_conv_net.h5')
+# model.summary()
 # print("Done.")
 
+# 모델 활용시 필요한 함수 정의
+# 전처리 함수
 # 모델 활용시 필요한 함수 정의
 # 전처리 함수
 def preprocess_date(line):
@@ -54,7 +56,7 @@ def translate_text(text, source_language='ko', target_language='en'):
     try:
         translation = response[0][0][0]
     except (IndexError, TypeError):
-        print(f"Translation failed for text: {text}")
+        # print(f"Translation failed for text: {text}")
         translation = ""
     return translation
 
@@ -70,6 +72,9 @@ def predict_mbti(text):
 
 # 카카오톡 대화파일 -> 사용자별 mbti 함수
 def predict_mbti_kakaotalk(filename):
+    # print("after : ",os.listdir(os.getcwd()))
+    # return
+    # return os.path.realpath(__file__)
     with open(filename, 'r', encoding='utf-8') as f:
         lines = f.readlines()
 
@@ -81,9 +86,9 @@ def predict_mbti_kakaotalk(filename):
     # Get chat room name and saved date
     chat_room_name = lines[0].strip()
     saved_date = lines[1].strip()
-    print(f"Chat Room: {chat_room_name}, Saved Date: {saved_date}")
+    # print(f"Chat Room: {chat_room_name}, Saved Date: {saved_date}")
 
-       # Group messages by user
+    # Group messages by user
     user_messages = {}
     current_user = None
     pattern = r'^\[(.*?)\] '  # [사용자명] 패턴
@@ -113,8 +118,13 @@ def predict_mbti_kakaotalk(filename):
         mbti_results[user] = top_k
 
     # Print MBTI results by user
+    data = {}
+    
     for user, results in mbti_results.items():
-        print(f"{user}: {results}") 
+        data[user] = str(results)
+        # print(f"{user}: {results}")
+    print(json.dumps(data))
 
 input_path = sys.argv[1]
-predict_mbti_kakaotalk(f"../{input_path}")
+# print(input_path)
+predict_mbti_kakaotalk(input_path)

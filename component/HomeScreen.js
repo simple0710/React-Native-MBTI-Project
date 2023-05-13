@@ -64,72 +64,62 @@ function HomeScreen({ navigation }) {
           type: "text/plain",
           name: fileTitle,
         });
-        await axios
-          // .post("http://10.0.2.2:8080/upload", formData, {
-          //   headers: {
-          //     "Content-Type": "multipart/form-data",
-          //   },
-          // })
-          .post(`${api}/upload`, formData, {
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
-          })
-          .then((res) => {
-            setLoading(false);
-            navigation.navigate("Result", { data: res.data, items: "ok" }); // 화면 이동
-          })
-          .catch((err) => {
-            console.log(err);
-          });
+        console.log("보낼 데이터 ", formData);
+        navigation.navigate("Result", { data: formData });
+        // await axios
+        //   .post(`${api}/upload`, formData, {
+        //     headers: {
+        //       "Content-Type": "multipart/form-data",
+        //     },
+        //   })
+        //   .then((res) => {
+        //     setLoading(false);
+        //     navigation.navigate("Result", { data: res.data }); // 화면 이동
+        //   })
+        //   .catch((err) => {
+        //     console.log(err);
+        //   });
       }
     } catch (err) {
       console.log(err);
     }
   };
   useEffect(() => {
-    setLoading(false);
     setFileTitle("");
     setUri("");
   }, []);
   return (
     <>
-      {loading ? (
-        <View style={styles.container}>
-          <Loading></Loading>
-        </View>
-      ) : (
-        <View style={styles.container}>
-          {/* 파일 업로드 */}
-          <TouchableOpacity
-            onPress={pickFile}
-            style={StyleSheet.compose(styles.button, styles.upload)}
-          >
-            <Text style={styles.upload_text}>File Upload</Text>
-          </TouchableOpacity>
-          <Text>{fileTitle ? fileTitle : "입력해주세요"}</Text>
+      <View style={styles.container}>
+        {/* 파일 업로드 */}
+        <TouchableOpacity
+          onPress={pickFile}
+          style={StyleSheet.compose(styles.button, styles.upload)}
+        >
+          <Text style={styles.upload_text}>File Upload</Text>
+        </TouchableOpacity>
+        <Text>{fileTitle ? fileTitle : "입력해주세요"}</Text>
 
-          {/* MBTI 검사 */}
-          <TouchableOpacity
-            onPress={getMbtiResult}
-            style={StyleSheet.compose(styles.button, styles.check)}
-          >
-            <Text style={styles.check_text}>Check</Text>
-          </TouchableOpacity>
-          <Text>{mbtiResult}</Text>
+        {/* MBTI 검사 */}
+        <TouchableOpacity
+          onPress={getMbtiResult}
+          style={StyleSheet.compose(styles.button, styles.check)}
+        >
+          <Text style={styles.check_text}>Check</Text>
+        </TouchableOpacity>
+        <Text>{mbtiResult}</Text>
 
-          {/* 테스트 */}
-          <TouchableOpacity
-            title="Login"
-            onPress={() => navigation.navigate("Result")}
-          >
-            <Text>화면 이동 테스트</Text>
-          </TouchableOpacity>
-          <View style={styles.test}>
-            <Text style={styles.test}>Made by BootStrap</Text>
-          </View>
+        {/* 테스트 */}
+        <TouchableOpacity
+          title="Login"
+          onPress={() => navigation.navigate("Result")}
+        >
+          <Text>화면 이동 테스트</Text>
+        </TouchableOpacity>
+        <View style={styles.test}>
+          <Text style={styles.test}>Made by BootStrap</Text>
         </View>
-      )}
+      </View>
     </>
   );
 }
