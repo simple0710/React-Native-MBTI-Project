@@ -66,19 +66,6 @@ function HomeScreen({ navigation }) {
         });
         console.log("보낼 데이터 ", formData);
         navigation.navigate("Result", { data: formData });
-        // await axios
-        //   .post(`${api}/upload`, formData, {
-        //     headers: {
-        //       "Content-Type": "multipart/form-data",
-        //     },
-        //   })
-        //   .then((res) => {
-        //     setLoading(false);
-        //     navigation.navigate("Result", { data: res.data }); // 화면 이동
-        //   })
-        //   .catch((err) => {
-        //     console.log(err);
-        //   });
       }
     } catch (err) {
       console.log(err);
