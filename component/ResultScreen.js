@@ -4,26 +4,33 @@ import { Text, TouchableOpacity, FlatList, View, Button } from "react-native";
 import { BarChart } from "react-native-chart-kit";
 import ViewShot from "react-native-view-shot";
 import Share from "react-native-share";
+import axios from "axios";
 // css
 import styles from "./styles/result_css";
+import Loading from "./Loading";
 
 function ResultScreen({ route, navigation }) {
   // MBTI 데이터이 길이를 구해 해당 값으로 값을 한다.
+  const [loading, setLoading] = useState(true);
   const [viewFlag, setViewFlag] = useState([]);
+  const [mbtiData, setMbtiData] = useState("");
+  const viewRef = useRef();
+  const api =
+    // "https://port-0-react-native-mbti-project-lme62alhih8uuf.sel4.cloudtype.app";
+    "http://10.0.2.2:8080";
+
   const flagInsert = (dataLen) => {
     for (let i = 0; i < dataLen; i++) {
       const True = true;
       setViewFlag((state) => [...state, True]);
     }
   };
-  const [mbtiData, setMbtiData] = useState("");
   // 토글 기능 수행
   const handleViewItem = (index) => {
     let flagCopy = [...viewFlag];
     flagCopy[index] = !flagCopy[index];
     setViewFlag(flagCopy);
   };
-  const viewRef = useRef();
 
   const onCapture = async () => {
     try {
@@ -32,13 +39,14 @@ function ResultScreen({ route, navigation }) {
         title: "test",
         message: "Some message",
         url: uri,
-        type: 'image/jpeg',
+        type: "image/jpeg",
       };
       await Share.open(shareOptions);
     } catch (error) {
       console.error(error);
     }
   };
+
   const MBTIResultList = (items, index) => {
     return (
       <>
@@ -79,7 +87,22 @@ function ResultScreen({ route, navigation }) {
       </>
     );
   };
-
+  const getMbtiResult = async (formData) => {
+    await axios
+      .post(`${api}/upload`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      .then((res) => {
+        // setLoading(false);
+        setMbtiData(res.data);
+        // console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   // BarChart 설정
   const chartConfig = {
     backgroundGradientFrom: "white",
@@ -94,36 +117,44 @@ function ResultScreen({ route, navigation }) {
 
   useEffect(() => {
     setViewFlag([]);
+
     if (route && route.params && route.params.data) {
-      const paramsData = route.params.data;
-      const listLength = paramsData.length;
-      flagInsert(listLength);
-      setMbtiData(paramsData);
+      const formData = route.params.data;
+      // getMbtiResult(paramsData);
+      // console.log(paramsData);
+      // const listLength = formData.length;
+      // console.log("데이터 출력", formData);
+      getMbtiResult(formData);
+    } else {
+      console.log("Not Data");
     }
   }, []);
   return (
     <>
       {mbtiData ? (
         <>
-          <ViewShot style={styles.container} ref={viewRef} options={{ format: 'png', quality: 0.9 }}>
-
+          <ViewShot
+            style={styles.container}
+            ref={viewRef}
+            options={{ format: "png", quality: 0.9 }}
+          >
             <FlatList
               ListHeaderComponentStyle={styles.container}
               data={mbtiData}
-              renderItem={({ item, index }) => (
-                  MBTIResultList(item, index)
-              )}
+              renderItem={({ item, index }) => MBTIResultList(item, index)}
               ListHeaderComponent={
                 <>
-                <View style={styles.result_container}>
-                  <Text style={styles.result_text}>Result</Text>
-                </View>
+                  <View style={styles.result_container}>
+                    <Text style={styles.result_text}>Result</Text>
+                  </View>
                 </>
               }
               ListFooterComponent={
                 <View style={styles.sub_container}>
-                  <TouchableOpacity style={styles.sub_button} onPress={onCapture}>
-                  
+                  <TouchableOpacity
+                    style={styles.sub_button}
+                    onPress={onCapture}
+                  >
                     <Text style={styles.sub_text}>Share</Text>
                   </TouchableOpacity>
                   <TouchableOpacity
@@ -138,14 +169,18 @@ function ResultScreen({ route, navigation }) {
               }
               // keyExtractor={(item, index) => index.toString()}
             />
-            </ViewShot>
+          </ViewShot>
         </>
       ) : (
         <>
-          <ViewShot style={styles.container} ref={viewRef} options={{ format: 'jpg', quality: 0.9 }}>
-            {/* 내용 */}
+          <Loading></Loading>
+          {/* <ViewShot
+            style={styles.container}
+            ref={viewRef}
+            options={{ format: "jpg", quality: 0.9 }}
+          >
 
-            <Text >안녕</Text>
+            <Text>안녕</Text>
             <Text>안녕</Text>
             <Text>안녕</Text>
             <Text>안녕</Text>
@@ -159,7 +194,7 @@ function ResultScreen({ route, navigation }) {
             <Text>안녕</Text>
             <Text>안녕</Text>
           </ViewShot>
-          <Button title="공유" onPress={onCapture} />
+          <Button title="공유" onPress={onCapture} /> */}
         </>
       )}
     </>

@@ -13,40 +13,70 @@ app.use(express.json());
 var cors = require("cors");
 app.use(cors());
 
-const tf = require("@tensorflow/tfjs-node");
 const path = require("path");
 
 // 파이썬 스크립트
 const { exec } = require("child_process");
+//기존 testpy
 
-async function loadModel(filePath) {
-  const modelPath = path.join(__dirname, "model/target_model/", "model.json");
-  // const model = await tf.node.loadSavedModel(`file://${modelPath}`);
-  const model = await tf.loadLayersModel(`file://${modelPath}`);
-  // console.log(model);
-  const text = fs.readFileSync(filePath, "utf-8");
-  const input = tf.tensor(text.split(""), [1, text.length]); //
-  // console.log(text);
-  // const output = tf.data.TextLineDataset(input);
-  const predictions = model.predict(input);
-  predictions.print();
-  return predictions;
-}
+// rwar 1
+// async function testpy(text) {
+//   console.log(text);
+//   const input = text;
+//   const pyPath = "pyfile/test.py";
+//   exec(
+//     `python ${pyPath} ${input}`,
+//     { decoding: "utf-8" },
+//     (error, stdout, stderr) => {
+//       if (error) {
+//         console.error(`Error: ${error}`);
+//         return;
+//       }
+//       const dict = stdout;
+//       const dictObject = JSON.parse(dict); // JSON 형태로 변형
+//       return dictObject;
+//       // console.log(dictObject["김찬민"]);
+//       // console.log(typeof dictObject);
+//     }
+//   );
+// }
+
+// test2
+// async function testpy(text) {
+//   console.log(text);
+//   const input = text;
+//   const pyPath = "pyfile/test.py";
+//   const { stdout, stderr } = await exec(`python ${pyPath} ${input}`);
+//   if (stderr) {
+//     console.error(`Error: ${stderr}`);
+//     return;
+//   }
+//   const dict = stdout;
+//   const dictObject = JSON.parse(dict); // JSON 형태로 변형
+//   return dictObject;
+// }
 
 async function testpy(text) {
+  console.log(text);
   const input = text;
   const pyPath = "pyfile/test.py";
-  exec(
-    `python ${pyPath} ${input}`,
-    { encoding: "utf-8" },
-    (error, stdout, stderr) => {
-      if (error) {
-        console.error(`Error: ${error}`);
-        return;
+
+  return new Promise((resolve, reject) => {
+    exec(
+      `python ${pyPath} ${input}`,
+      { decoding: "utf-8" },
+      (error, stdout, stderr) => {
+        if (error) {
+          console.error(`Error: ${error}`);
+          reject(error);
+          return;
+        }
+        const dict = stdout;
+        const dictObject = JSON.parse(dict); // JSON 형태로 변형
+        resolve(dictObject);
       }
-      console.log(`Output: ${stdout}`);
-    }
-  );
+    );
+  });
 }
 
 app.listen(8080, () => {
@@ -70,10 +100,10 @@ app.get("/test", (req, res) => {
   res.send("test ok");
 });
 
-app.post("/upload", upload.single("file"), (req, res) => {
-  console.log("in");
+app.post("/upload", upload.single("file"), async (req, res) => {
+  console.log("upload success");
   const { originalname, path } = req.file;
-  const newPath = `uploads/${originalname}`;
+  const newPath = `pyfile/uploads/${originalname}`;
   const MBTIData = [
     {
       name: "김찬민",
@@ -112,43 +142,18 @@ app.post("/upload", upload.single("file"), (req, res) => {
       ],
     },
   ];
-  console.log(path);
-  console.log(newPath);
-  console.log(__dirname);
-  fs.rename(path, newPath, (err) => {
+  // console.log("path : ", path);
+  // console.log("newPath : ", newPath);
+  // console.log(__dirname);
+  fs.renameSync(path, newPath, async (err) => {
     if (err) {
       console.error(err);
       res.sendStatus(500);
-    } else {
-      console.log("File uploaded successfully");
-      const filePath = "uploads/" + req.file.originalname;
-      // 데이터 저장
-      fs.readFile(filePath, "utf-8", (err, data) => {
-        if (err) {
-          console.error(err);
-          res.sendStatus(500);
-        } else {
-          // console.log(data.toString());
-          // 모델에 카톡 내용 추가 후 MBTI 결과 반환
-          // JSON 형태로 전달
-          // 모델 예측
-          // console.log(output);
-          // loadModel(filePath);
-          const test = "안녕하세요";
-          console.log(filePath);
-          console.log(testpy(filePath)); // 전처리 및 모델 가져오기
-          // text = testpy(test); // 전처리 코드
-          fs.unlink(filePath, (err) => {
-            if (err) {
-              console.log(err);
-              res.sendStatus(500);
-            } else {
-              // loadModel();
-              res.send(MBTIData);
-            }
-          });
-        }
-      });
     }
   });
+  console.log("File uploaded successfully");
+  const filePath = "pyfile/uploads/" + req.file.originalname;
+  const data = await testpy(filePath);
+  console.log(data);
+  res.send(data);
 });
