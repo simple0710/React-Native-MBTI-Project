@@ -20,15 +20,18 @@ from tensorflow.keras.callbacks import EarlyStopping
 from sklearn.model_selection import train_test_split
 import os
 
+# sys.argv[1]
+# print(str(os.getcwd())) # 현재 디렉터리 확인
+
 # load label, tokenizer with max_len, and models
 label_dict = {'istj': 0, 'isfj': 1, 'infj': 2, 'intj': 3, 'istp': 4, 'isfp': 5, 'infp': 6, 'intp': 7,
               'estp': 8, 'esfp': 9, 'enfp': 10, 'entp': 11, 'estj': 12, 'esfj': 13, 'enfj': 14, 'entj': 15}
 # print("modir : ",os.listdir(os.getcwd()))
-with open('model/tokenizer.pickle', 'rb') as handle:
+with open('pyfile/model/tokenizer.pickle', 'rb') as handle:
     tokenizer = pickle.load(handle)
 max_len = 4491
 word_index = tokenizer.word_index
-model = load_model('model/model_conv_net.h5')
+model = load_model('pyfile/model/model_conv_net.h5')
 # model.summary()
 # print("Done.")
 
@@ -124,6 +127,7 @@ def predict_mbti_kakaotalk(filename):
         data[user] = str(results)
         # print(f"{user}: {results}")
     print(json.dumps(data))
+    # print(data)
 
 input_path = sys.argv[1]
 # print(input_path)

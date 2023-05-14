@@ -16,8 +16,8 @@ function ResultScreen({ route, navigation }) {
   const [mbtiData, setMbtiData] = useState("");
   const viewRef = useRef();
   const api =
-    // "https://port-0-react-native-mbti-project-lme62alhih8uuf.sel4.cloudtype.app";
-    "http://10.0.2.2:8080";
+  // "https://port-0-react-native-mbti-project-lme62alhih8uuf.sel4.cloudtype.app";
+  "http://10.0.2.2:8080";
 
   const flagInsert = (dataLen) => {
     for (let i = 0; i < dataLen; i++) {
@@ -96,6 +96,10 @@ function ResultScreen({ route, navigation }) {
       })
       .then((res) => {
         // setLoading(false);
+        console.log(res.data);
+        console.log(typeof res.data)
+
+        console.log(res.data)
         setMbtiData(res.data);
         // console.log(res.data);
       })
@@ -123,7 +127,7 @@ function ResultScreen({ route, navigation }) {
       // getMbtiResult(paramsData);
       // console.log(paramsData);
       // const listLength = formData.length;
-      // console.log("데이터 출력", formData);
+      // console.log("파일 내용 출력", formData._parts);
       getMbtiResult(formData);
     } else {
       console.log("Not Data");
@@ -173,28 +177,9 @@ function ResultScreen({ route, navigation }) {
         </>
       ) : (
         <>
+        <View style={styles.container}>
           <Loading></Loading>
-          {/* <ViewShot
-            style={styles.container}
-            ref={viewRef}
-            options={{ format: "jpg", quality: 0.9 }}
-          >
-
-            <Text>안녕</Text>
-            <Text>안녕</Text>
-            <Text>안녕</Text>
-            <Text>안녕</Text>
-            <Text>안녕</Text>
-            <Text>안녕</Text>
-            <Text>안녕</Text>
-            <Text>안녕</Text>
-            <Text>안녕</Text>
-            <Text>안녕</Text>
-            <Text>안녕</Text>
-            <Text>안녕</Text>
-            <Text>안녕</Text>
-          </ViewShot>
-          <Button title="공유" onPress={onCapture} /> */}
+        </View>
         </>
       )}
     </>

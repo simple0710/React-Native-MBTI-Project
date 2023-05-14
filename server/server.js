@@ -17,50 +17,12 @@ const path = require("path");
 
 // 파이썬 스크립트
 const { exec } = require("child_process");
-//기존 testpy
 
-// rwar 1
-// async function testpy(text) {
-//   console.log(text);
-//   const input = text;
-//   const pyPath = "pyfile/test.py";
-//   exec(
-//     `python ${pyPath} ${input}`,
-//     { decoding: "utf-8" },
-//     (error, stdout, stderr) => {
-//       if (error) {
-//         console.error(`Error: ${error}`);
-//         return;
-//       }
-//       const dict = stdout;
-//       const dictObject = JSON.parse(dict); // JSON 형태로 변형
-//       return dictObject;
-//       // console.log(dictObject["김찬민"]);
-//       // console.log(typeof dictObject);
-//     }
-//   );
-// }
-
-// test2
-// async function testpy(text) {
-//   console.log(text);
-//   const input = text;
-//   const pyPath = "pyfile/test.py";
-//   const { stdout, stderr } = await exec(`python ${pyPath} ${input}`);
-//   if (stderr) {
-//     console.error(`Error: ${stderr}`);
-//     return;
-//   }
-//   const dict = stdout;
-//   const dictObject = JSON.parse(dict); // JSON 형태로 변형
-//   return dictObject;
-// }
-
-async function testpy(text) {
-  console.log(text);
-  const input = text;
+async function testpy(filePath) {
+  console.log(filePath);
+  const showLabel = 7 // 화면 출력 MBTI 개수
+  const input = filePath;
   const pyPath = "pyfile/test.py";
-
   return new Promise((resolve, reject) => {
     exec(
       `python ${pyPath} ${input}`,
@@ -71,9 +33,35 @@ async function testpy(text) {
           reject(error);
           return;
         }
+        // console.log(stdout)
         const dict = stdout;
         const dictObject = JSON.parse(dict); // JSON 형태로 변형
-        resolve(dictObject);
+        // console.log(dictObject)
+        console.log(typeof dictObject)
+        const MbtiData = []
+        Object.entries(dictObject).forEach(([key, value]) => {
+          const data = [];
+          const labels = [];
+          // 작은 따옴표 -> 큰 따옴표, 대괄호 -> 괄호
+          const lis = value.replace(/\(/g, "[").replace(/\)/g, "]").replace(/'/g, '"');;
+          const v = JSON.parse(lis);
+          for (let i = 0; i < showLabel; i++) {
+            labels.push(v[i][0]);
+            data.push(parseInt(v[i][1] * 100));
+          }
+          const onePeople = {
+            "name" : key,
+            "labels" : labels,
+            "datasets" : [
+              {
+                "data" : data,
+              }
+            ]
+          }
+          MbtiData.push(onePeople);
+        })
+        console.log(MbtiData);
+        resolve(MbtiData);
       }
     );
   });
@@ -92,68 +80,24 @@ app.get("/test", (req, res) => {
   //     console.error("Error reading directory:", err);
   //     return;
   //   }
-
-  //   files.forEach((file) => {
-  //     console.log(file);
-  //   });
-  // });
   res.send("test ok");
 });
 
 app.post("/upload", upload.single("file"), async (req, res) => {
-  console.log("upload success");
   const { originalname, path } = req.file;
-  const newPath = `pyfile/uploads/${originalname}`;
-  const MBTIData = [
-    {
-      name: "김찬민",
-      labels: ["INFP", "ISFP", "INTP", "ESFP", "ENTP", "ENTJ", "INTP"],
-      datasets: [
-        {
-          data: [70, 10, 5, 5, 5, 4, 1],
-        },
-      ],
-    },
-    {
-      name: "김찬민 2",
-      labels: ["ISFP", "INFP", "INTP", "ESFP", "ENTP", "ENTJ", "INTP"],
-      datasets: [
-        {
-          data: [60, 10, 5, 5, 5, 4, 1],
-        },
-      ],
-    },
-    {
-      name: "김찬민 3",
-      labels: ["ISFP", "INFP", "INTP", "ESFP", "ENTP", "ENTJ", "INTP"],
-      datasets: [
-        {
-          data: [50, 10, 5, 5, 5, 4, 1],
-        },
-      ],
-    },
-    {
-      name: "김찬민 4",
-      labels: ["ISFP", "INFP", "INTP", "ESFP", "ENTP", "ENTJ", "INTP"],
-      datasets: [
-        {
-          data: [50, 40, 5, 5, 5, 4, 1],
-        },
-      ],
-    },
-  ];
-  // console.log("path : ", path);
-  // console.log("newPath : ", newPath);
-  // console.log(__dirname);
-  fs.renameSync(path, newPath, async (err) => {
-    if (err) {
-      console.error(err);
-      res.sendStatus(500);
-    }
-  });
-  console.log("File uploaded successfully");
-  const filePath = "pyfile/uploads/" + req.file.originalname;
+  console.log("upload success");
+  console.log(path)
+  const newPath = `uploads/${originalname}`;
+  fs.renameSync(path, newPath, (err, data) => {
+    if (err) throw err;
+  })
+  const filePath = "uploads/" + originalname;
   const data = await testpy(filePath);
-  console.log(data);
+
+  // txt 파일 삭제
+  fs.unlinkSync(filePath, (err) => {
+    if (err) throw err;
+  })
+  // console.log(data);
   res.send(data);
 });
