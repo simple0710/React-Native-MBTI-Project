@@ -1,12 +1,19 @@
 // ResultScreen.js
 import React, { useState, useEffect, useRef } from "react";
-import { Text, TouchableOpacity, FlatList, View, Button } from "react-native";
+import {
+  Text,
+  TouchableOpacity,
+  FlatList,
+  View,
+  Button,
+  StyleSheet,
+} from "react-native";
 import { BarChart } from "react-native-chart-kit";
 import ViewShot from "react-native-view-shot";
 import Share from "react-native-share";
 import axios from "axios";
 // css
-import styles from "./styles/result_css";
+// import styles from "./styles/result_css";
 import Loading from "./Loading";
 
 function ResultScreen({ route, navigation }) {
@@ -50,7 +57,7 @@ function ResultScreen({ route, navigation }) {
   const MBTIResultList = (items, index) => {
     return (
       <>
-        <View styles={styles.container}>
+        <View style={styles.body}>
           <TouchableOpacity
             onPress={() => {
               handleViewItem(index);
@@ -66,25 +73,26 @@ function ResultScreen({ route, navigation }) {
               </Text>
             )}
           </TouchableOpacity>
-          {viewFlag[index] && (
-            // <View style={styles.container}>
-            <View style={styles.graph_container}>
-              <BarChart
-                data={items}
-                width={400} // 그래프 사이 간격
-                height={220}
-                chartConfig={chartConfig}
-                fromZero={true} // 0부터 시작
-                showBarTops={false} // 더 잘 보이게 하는 바 삭제
-                showValuesOnTopOfBars={true} // 그래프 상단 퍼센트 표시
-                // withInnerLines={false} // 점선 삭제
-                // yLabelsOffset={"   "}
-                yAxisSuffix=" %"
-                // withHorizontalLabels={false} // y 라벨 숨기기
-              />
-            </View>
-          )}
         </View>
+        {viewFlag[index] && (
+          // <View style={styles.container}>
+          <View style={styles.graph_container}>
+            <BarChart
+              data={items}
+              width={400} // 그래프 사이 간격
+              height={220}
+              chartConfig={chartConfig}
+              fromZero={true} // 0부터 시작
+              showBarTops={false} // 더 잘 보이게 하는 바 삭제
+              showValuesOnTopOfBars={true} // 그래프 상단 퍼센트 표시
+              // withInnerLines={false} // 점선 삭제
+              // yLabelsOffset={"   "}
+              yAxisSuffix=" %"
+              // withHorizontalLabels={false} // y 라벨 숨기기
+            />
+          </View>
+          // </View>
+        )}
       </>
     );
   };
@@ -175,7 +183,32 @@ function ResultScreen({ route, navigation }) {
   }, []);
   return (
     <>
-      {mbtiData ? (
+      <View style={styles.container}>
+        <View style={styles.header} />
+        <View style={styles.content}>
+          <View style={styles.elem}>
+            <View style={styles.userInfo}>
+              <View style={styles.profile} />
+              <Text style={styles.name}>윾또막</Text>
+            </View>
+            <View style={styles.userComment}>
+              <Text>대화명을 입력하세요</Text>
+            </View>
+          </View>
+
+          <View style={styles.elem}>
+            <View style={styles.userInfo}>
+              <View style={styles.profile} />
+              <Text style={styles.name}>저커버그</Text>
+            </View>
+            <View style={styles.userComment}>
+              <Text>정말 맥주라도 한 잔 사는게 어떻겠니?</Text>
+            </View>
+          </View>
+        </View>
+        <View style={styles.footer} />
+      </View>
+      {/* {mbtiData ? (
         <>
           <ViewShot
             style={styles.test}
@@ -183,14 +216,11 @@ function ResultScreen({ route, navigation }) {
             options={{ format: "png", quality: 0.9 }}
           >
             <FlatList
-              styles={styles.test}
+              // styles={styles.test}
               ListHeaderComponentStyle={styles.header}
-              ListFooterComponentStyle={{ flex: 0.2 }}
-              contentContainerStyle={styles.body}
+              // ListFooterComponentStyle={{ flex: 1 }}
               data={mbtiData}
-              renderItem={({ item, index }) => (
-                <View>{MBTIResultList(item, index)}</View>
-              )}
+              renderItem={({ item, index }) => MBTIResultList(item, index)}
               ListHeaderComponent={
                 <>
                   <View style={styles.result_container}>
@@ -228,9 +258,54 @@ function ResultScreen({ route, navigation }) {
             <Loading></Loading>
           </View>
         </>
-      )}
+      )} */}
     </>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  header: {
+    height: 60,
+    backgroundColor: "green",
+  },
+  footer: {
+    height: 60,
+    backgroundColor: "red",
+  },
+  content: {
+    flex: 1,
+  },
+
+  elem: {
+    width: "100%",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    borderColor: "#eee",
+    borderBottomWidth: 0.5,
+    padding: 5,
+  },
+  userInfo: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  userComment: {
+    padding: 8,
+    backgroundColor: "yellow",
+    borderRadius: 5,
+  },
+  profile: {
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    backgroundColor: "yellow",
+  },
+  name: {
+    paddingLeft: 10,
+  },
+});
 
 export default ResultScreen;

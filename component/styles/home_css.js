@@ -5,7 +5,8 @@ const home_css = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "space-between",
+    // backgroundColor: "blue",
   },
 
   // Button Styles
@@ -14,6 +15,29 @@ const home_css = StyleSheet.create({
     // 중앙 정렬
     alignItems: "center",
     flexDirection: "row",
+  },
+  // Header Styles
+  header: {
+    flex: 0.4,
+    width: Dimensions.get("window").width,
+    verticalAlign: "middle",
+    textAlign: "center",
+    backgroundColor: "#CCCCCC",
+    alignItems: "center",
+  },
+  logo_text: {
+    flex: 1,
+    verticalAlign: "middle",
+    fontSize: 50,
+    fontWeight: "bold",
+  },
+
+  // Body Styles
+  body: {
+    flex: 0.3,
+    width: Dimensions.get("window").width,
+    verticalAlign: "center",
+    alignItems: "center",
   },
 
   // Upload Button Styles
@@ -41,6 +65,19 @@ const home_css = StyleSheet.create({
     textAlign: "center",
     fontSize: 16,
     fontWeight: "bold",
+  },
+  footer: {
+    flex: 0.05,
+    textAlign: "center",
+    // backgroundColor: "#CCCCCC",
+    borderTopColor: "black",
+
+    alignItems: "center",
+  },
+  footer_text: {
+    flex: 1,
+    fontSize: 12,
+    verticalAlign: "middle",
   },
 });
 

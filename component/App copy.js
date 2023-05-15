@@ -16,20 +16,22 @@ function App() {
         {/* <View style={styles.header}>
           <Text style={styles.logo_text}>KIU:TI</Text>
         </View> */}
-        <NavigationContainer>
-          <Stack.Navigator initialRouteName="Router">
-            <Stack.Screen
-              name="Home"
-              component={HomeScreen}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="Result"
-              component={ResultScreen}
-              options={{ headerShown: false }}
-            />
-          </Stack.Navigator>
-        </NavigationContainer>
+        <View style={styles.router}>
+          <NavigationContainer>
+            <Stack.Navigator initialRouteName="Router">
+              <Stack.Screen
+                name="Home"
+                component={HomeScreen}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="Result"
+                component={ResultScreen}
+                options={{ headerShown: false }}
+              />
+            </Stack.Navigator>
+          </NavigationContainer>
+        </View>
         {/* <View style={styles.footer}>
           <Text style={styles.footer_text}>약관</Text>
           <Text style={styles.footer_text}>copyright</Text>

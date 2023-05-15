@@ -50,24 +50,23 @@ function ResultScreen({ route, navigation }) {
   const MBTIResultList = (items, index) => {
     return (
       <>
-        <View styles={styles.container}>
-          <TouchableOpacity
-            onPress={() => {
-              handleViewItem(index);
-            }}
-          >
-            {viewFlag[index] ? (
-              <Text style={styles.toggle_word} key={index}>
-                ▼ {items.name}님의 결과
-              </Text>
-            ) : (
-              <Text style={styles.toggle_word} key={index}>
-                ▶ {items.name}님의 결과
-              </Text>
-            )}
-          </TouchableOpacity>
-          {viewFlag[index] && (
-            // <View style={styles.container}>
+        <TouchableOpacity
+          onPress={() => {
+            handleViewItem(index);
+          }}
+        >
+          {viewFlag[index] ? (
+            <Text style={styles.toggle_word} key={index}>
+              ▼ {items.name}님의 결과
+            </Text>
+          ) : (
+            <Text style={styles.toggle_word} key={index}>
+              ▶ {items.name}님의 결과
+            </Text>
+          )}
+        </TouchableOpacity>
+        {viewFlag[index] && (
+          <View style={styles.container}>
             <View style={styles.graph_container}>
               <BarChart
                 data={items}
@@ -83,12 +82,14 @@ function ResultScreen({ route, navigation }) {
                 // withHorizontalLabels={false} // y 라벨 숨기기
               />
             </View>
-          )}
-        </View>
+          </View>
+        )}
       </>
     );
   };
-
+  const test = () => {
+    axios.get({ api });
+  };
   const getMbtiResult = async (formData) => {
     await axios
       .post(`${api}/upload`, formData, {
@@ -138,59 +139,24 @@ function ResultScreen({ route, navigation }) {
       // console.log(paramsData);
       // const listLength = formData.length;
       // console.log("파일 내용 출력", formData._parts);
-
-      // getMbtiResult(formData);
+      getMbtiResult(formData);
     } else {
       console.log("Not Data");
     }
-    setMbtiData([
-      {
-        name: "김찬민",
-        labels: ["INFP", "ISFP", "INTP", "ESFP", "ENTP", "ENTJ", "INTP"],
-        datasets: [
-          {
-            data: [70, 10, 5, 5, 5, 4, 1],
-          },
-        ],
-      },
-      {
-        name: "김찬민 2",
-        labels: ["ISFP", "INFP", "INTP", "ESFP", "ENTP", "ENTJ", "INTP"],
-        datasets: [
-          {
-            data: [60, 10, 5, 5, 5, 4, 1],
-          },
-        ],
-      },
-      {
-        name: "김찬민 3",
-        labels: ["ISFP", "INFP", "INTP", "ESFP", "ENTP", "ENTJ", "INTP"],
-        datasets: [
-          {
-            data: [50, 10, 5, 5, 5, 4, 1],
-          },
-        ],
-      },
-    ]);
   }, []);
   return (
     <>
       {mbtiData ? (
         <>
           <ViewShot
-            style={styles.test}
+            style={styles.container}
             ref={viewRef}
             options={{ format: "png", quality: 0.9 }}
           >
             <FlatList
-              styles={styles.test}
-              ListHeaderComponentStyle={styles.header}
-              ListFooterComponentStyle={{ flex: 0.2 }}
-              contentContainerStyle={styles.body}
+              ListHeaderComponentStyle={styles.container}
               data={mbtiData}
-              renderItem={({ item, index }) => (
-                <View>{MBTIResultList(item, index)}</View>
-              )}
+              renderItem={({ item, index }) => MBTIResultList(item, index)}
               ListHeaderComponent={
                 <>
                   <View style={styles.result_container}>
@@ -199,24 +165,22 @@ function ResultScreen({ route, navigation }) {
                 </>
               }
               ListFooterComponent={
-                <>
-                  <View style={styles.sub_container}>
-                    <TouchableOpacity
-                      style={styles.sub_button}
-                      onPress={onCapture}
-                    >
-                      <Text style={styles.sub_text}>Share</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                      style={styles.sub_button}
-                      onPress={() => {
-                        navigation.navigate("Home");
-                      }}
-                    >
-                      <Text style={styles.sub_text}>뒤로가기</Text>
-                    </TouchableOpacity>
-                  </View>
-                </>
+                <View style={styles.sub_container}>
+                  <TouchableOpacity
+                    style={styles.sub_button}
+                    onPress={onCapture}
+                  >
+                    <Text style={styles.sub_text}>Share</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    style={styles.sub_button}
+                    onPress={() => {
+                      navigation.navigate("Home");
+                    }}
+                  >
+                    <Text style={styles.sub_text}>뒤로가기</Text>
+                  </TouchableOpacity>
+                </View>
               }
               // keyExtractor={(item, index) => index.toString()}
             />

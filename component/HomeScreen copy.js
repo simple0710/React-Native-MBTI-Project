@@ -87,44 +87,37 @@ function HomeScreen({ navigation }) {
   return (
     <>
       <SafeAreaView style={styles.container}>
-        {/* Title */}
         <View style={styles.header}>
           <Text style={styles.logo_text}>KIU:TI</Text>
         </View>
+        {/* 파일 업로드 */}
+        <TouchableOpacity
+          onPress={pickFile}
+          style={StyleSheet.compose(styles.button, styles.upload)}
+        >
+          <Text style={styles.upload_text}>File Upload</Text>
+        </TouchableOpacity>
+        <Text>{fileTitle ? fileTitle : "입력해주세요"}</Text>
 
-        {/* Body */}
-        <View style={styles.body}>
-          {/* 파일 업로드 */}
-          <TouchableOpacity
-            onPress={pickFile}
-            style={StyleSheet.compose(styles.button, styles.upload)}
-          >
-            <Text style={styles.upload_text}>File Upload</Text>
-          </TouchableOpacity>
-          <Text>{fileTitle ? fileTitle : "입력해주세요"}</Text>
+        {/* MBTI 검사 */}
+        <TouchableOpacity
+          onPress={getMbtiResult}
+          style={StyleSheet.compose(styles.button, styles.check)}
+        >
+          <Text style={styles.check_text}>Check</Text>
+        </TouchableOpacity>
+        <Text>{mbtiResult}</Text>
 
-          {/* MBTI 검사 */}
-          <TouchableOpacity
-            onPress={getMbtiResult}
-            style={StyleSheet.compose(styles.button, styles.check)}
-          >
-            <Text style={styles.check_text}>Check</Text>
-          </TouchableOpacity>
-          <Text>{mbtiResult}</Text>
-
-          {/* 테스트 */}
-          <TouchableOpacity
-            title="Login"
-            onPress={() => navigation.navigate("Result")}
-          >
-            <Text>화면 이동 테스트</Text>
-          </TouchableOpacity>
-          <View style={styles.test}>
-            <Text style={styles.test}>Made by BootStrap</Text>
-          </View>
+        {/* 테스트 */}
+        {/* <TouchableOpacity
+          title="Login"
+          onPress={() => navigation.navigate("Result")}
+        >
+          <Text>화면 이동 테스트</Text>
+        </TouchableOpacity> */}
+        <View style={styles.test}>
+          <Text style={styles.test}>Made by BootStrap</Text>
         </View>
-
-        {/* Footer */}
         <View style={styles.footer}>
           <Text style={styles.footer_text}>약관</Text>
           <Text style={styles.footer_text}>copyright</Text>

@@ -22,7 +22,7 @@ async function pyScript(filePath) {
   console.log(filePath);
   const showLabel = 7; // 화면 출력 MBTI 개수
   const input = filePath;
-  const pyPath = "pyfile/test.py";
+  const pyPath = "pyfile/tensorScript.py";
   return new Promise((resolve, reject) => {
     exec(
       `python ${pyPath} ${input}`,
