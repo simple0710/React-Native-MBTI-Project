@@ -14,7 +14,7 @@ function App() {
     <>
       <SafeAreaView style={styles.main_container}>
         <View style={styles.header}>
-          <Text style={styles.logo_text}>Logo</Text>
+          <Text style={styles.logo_text}>KIUIT</Text>
         </View>
         <View style={styles.router}>
           <NavigationContainer>

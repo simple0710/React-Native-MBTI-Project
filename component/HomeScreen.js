@@ -6,7 +6,6 @@ import axios from "axios";
 // css
 import styles from "./styles/home_css";
 // component
-import Loading from "./Loading";
 
 function HomeScreen({ navigation }) {
   const [fileTitle, setFileTitle] = useState("");
@@ -14,8 +13,8 @@ function HomeScreen({ navigation }) {
   const [uri, setUri] = useState("");
   const [loading, setLoading] = useState("");
   const api =
-    // "https://port-0-react-native-mbti-project-lme62alhih8uuf.sel4.cloudtype.app";
-    "http://10.0.2.2:8080";
+    "https://port-0-react-native-mbti-project-lme62alhih8uuf.sel4.cloudtype.app";
+  // "http://10.0.2.2:8080";
   const pickFile = async () => {
     try {
       console.log("Picking file");
@@ -97,12 +96,12 @@ function HomeScreen({ navigation }) {
         <Text>{mbtiResult}</Text>
 
         {/* 테스트 */}
-        <TouchableOpacity
+        {/* <TouchableOpacity
           title="Login"
           onPress={() => navigation.navigate("Result")}
         >
           <Text>화면 이동 테스트</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
         <View style={styles.test}>
           <Text style={styles.test}>Made by BootStrap</Text>
         </View>

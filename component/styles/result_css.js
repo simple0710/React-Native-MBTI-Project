@@ -4,7 +4,7 @@ const result_css = StyleSheet.create({
   // Main Styles
   container: {
     flex: 1,
-    backgroundColor: "white",
+    // backgroundColor: "white",
     alignItems: "center",
     justifyContent: "center",
     width: Dimensions.get("window").width,

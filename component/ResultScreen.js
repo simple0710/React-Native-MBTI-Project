@@ -16,8 +16,8 @@ function ResultScreen({ route, navigation }) {
   const [mbtiData, setMbtiData] = useState("");
   const viewRef = useRef();
   const api =
-  // "https://port-0-react-native-mbti-project-lme62alhih8uuf.sel4.cloudtype.app";
-  "http://10.0.2.2:8080";
+    "https://port-0-react-native-mbti-project-lme62alhih8uuf.sel4.cloudtype.app";
+  // "http://10.0.2.2:8080";
 
   const flagInsert = (dataLen) => {
     for (let i = 0; i < dataLen; i++) {
@@ -87,6 +87,9 @@ function ResultScreen({ route, navigation }) {
       </>
     );
   };
+  const test = () => {
+    axios.get({ api });
+  };
   const getMbtiResult = async (formData) => {
     await axios
       .post(`${api}/upload`, formData, {
@@ -96,14 +99,22 @@ function ResultScreen({ route, navigation }) {
       })
       .then((res) => {
         // setLoading(false);
-        console.log(res.data);
-        console.log(typeof res.data)
+        if (res.data == "fail") {
+          navigation.navigate("Home");
+          alert("re upload");
+        }
 
-        console.log(res.data)
+        console.log(res.data);
+        console.log(typeof res.data);
+
+        console.log(res.data);
         setMbtiData(res.data);
         // console.log(res.data);
       })
       .catch((err) => {
+        if (axios.isCancel(err)) {
+          console.log("요청 취소");
+        }
         console.log(err);
       });
   };
@@ -177,9 +188,9 @@ function ResultScreen({ route, navigation }) {
         </>
       ) : (
         <>
-        <View style={styles.container}>
-          <Loading></Loading>
-        </View>
+          <View style={styles.container}>
+            <Loading></Loading>
+          </View>
         </>
       )}
     </>
