@@ -202,25 +202,29 @@ function ResultScreen({ route, navigation }) {
     <>
       {mbtiData ? (
         <>
-          <ViewShot
-            style={styles.container}
-            ref={viewRef}
-            options={{ format: "png", quality: 0.9 }}
-          >
-            <FlatList
-              contentContainerStyle={{ padding: 20 }}
-              data={mbtiData}
-              renderItem={({ item, index }) => MBTIResultList(item, index)}
-              ListHeaderComponent={
-                <>
-                  <View style={styles.result_container}>
-                    <Text style={styles.result_text}>Result</Text>
-                  </View>
-                </>
-              }
-              keyExtractor={(item, index) => index.toString()}
-            />
-          </ViewShot>
+          <View style={{ flex: 1 }}>
+            <View style={{ flex: 1 }}>
+              <ViewShot
+                style={styles.container}
+                ref={viewRef}
+                options={{ format: "png", quality: 0.9 }}
+              >
+                <FlatList
+                  contentContainerStyle={{ padding: 20 }}
+                  data={mbtiData}
+                  renderItem={({ item, index }) => MBTIResultList(item, index)}
+                  ListHeaderComponent={
+                    <>
+                      <View style={styles.result_container}>
+                        <Text style={styles.result_text}>Result</Text>
+                      </View>
+                    </>
+                  }
+                  keyExtractor={(item, index) => index.toString()}
+                />
+              </ViewShot>
+            </View>
+          </View>
           {/* footer */}
           {footerFlag ? (
             <>

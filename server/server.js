@@ -19,7 +19,7 @@ const path = require("path");
 const { exec } = require("child_process");
 
 async function pyScript(filePath) {
-  console.log(filePath);
+  // console.log(filePath);
   const showLabel = 7; // 화면 출력 MBTI 개수
   const input = filePath;
   const pyPath = "pyfile/tensorScript.py";
@@ -79,17 +79,7 @@ app.listen(8080, () => {
 app.get("/test", (req, res) => {
   console.log("test ok");
   // 파일 위치 파악
-  fs.readdir("./uploads/", (err, files) => {
-    console.log(files);
-    if (files.includes("KakaoTalk_20230503_1908_03_261_.txt")) {
-      console.log(1);
-    }
-    if (err) {
-      console.error("Error reading directory:", err);
-      return;
-    }
-  });
-  res.send("test ok");
+  // res.send("test ok");
 });
 
 app.post("/upload", upload.single("file"), async (req, res) => {

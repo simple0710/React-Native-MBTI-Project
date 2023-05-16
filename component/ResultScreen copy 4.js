@@ -1,12 +1,6 @@
 // ResultScreen.js
 import React, { useState, useEffect, useRef } from "react";
-import {
-  Text,
-  TouchableOpacity,
-  FlatList,
-  View,
-  Dimensions,
-} from "react-native";
+import { Text, TouchableOpacity, FlatList, View } from "react-native";
 import { BarChart } from "react-native-chart-kit";
 import ViewShot from "react-native-view-shot";
 import Share from "react-native-share";
@@ -16,34 +10,20 @@ import styles from "./styles/result_css";
 import Loading from "./Loading";
 
 function ResultScreen({ route, navigation }) {
-  const [progress, setProgress] = useState(0);
-  const [value, setValue] = useState(0);
-
   // MBTI 데이터이 길이를 구해 해당 값으로 값을 한다.
-  // const [progress, setProgress] = useState(0);
-  const [footerFlag, setFooterFlag] = useState(false);
-
+  const [loading, setLoading] = useState(true);
   const [viewFlag, setViewFlag] = useState([]);
   const [mbtiData, setMbtiData] = useState("");
   const viewRef = useRef();
   const api =
     // "https://port-0-react-native-mbti-project-lme62alhih8uuf.sel4.cloudtype.app";
     "http://10.0.2.2:8080";
-  const handleButtonPress = () => {
-    // 서버에서 값을 받아온다고 가정하고, 값을 받은 후 setProgress를 통해 상태를 업데이트합니다.
-    // 받은 값을 기반으로 화면에 출력할 수 있습니다.
-    // 이 부분은 실제 서버 요청 및 처리 로직에 따라 구현해야 합니다.
-    const receivedValue = 50; // 받은 값
-    setProgress(receivedValue);
-  };
+
   const flagInsert = (dataLen) => {
     for (let i = 0; i < dataLen; i++) {
       const True = true;
       setViewFlag((state) => [...state, True]);
     }
-  };
-  const handleFooterFlag = () => {
-    setFooterFlag((state) => !state);
   };
   // 토글 기능 수행
   const handleViewItem = (index) => {
@@ -75,22 +55,22 @@ function ResultScreen({ route, navigation }) {
             handleViewItem(index);
           }}
         >
-          {!viewFlag[index] ? (
-            <Text style={styles.toggle_text} key={index}>
+          {viewFlag[index] ? (
+            <Text style={styles.toggle_word} key={index}>
               ▼ {items.name}님의 결과
             </Text>
           ) : (
-            <Text style={styles.toggle_text} key={index}>
+            <Text style={styles.toggle_word} key={index}>
               ▶ {items.name}님의 결과
             </Text>
           )}
         </TouchableOpacity>
-        {!viewFlag[index] && (
+        {viewFlag[index] && (
           <View style={styles.container}>
             <View style={styles.graph_container}>
               <BarChart
                 data={items}
-                width={Dimensions.get("window").width - 50} // 그래프 사이 간격
+                width={400} // 그래프 사이 간격
                 height={220}
                 chartConfig={chartConfig}
                 fromZero={true} // 0부터 시작
@@ -116,13 +96,16 @@ function ResultScreen({ route, navigation }) {
         },
       })
       .then((res) => {
+        // setLoading(false);
         if (res.data == "fail") {
           navigation.navigate("Home");
           alert("re upload");
         }
-        // console.log(res.data);
-        // console.log(typeof res.data);
-        // console.log(res.data);
+
+        console.log(res.data);
+        console.log(typeof res.data);
+
+        console.log(res.data);
         setMbtiData(res.data);
         // console.log(res.data);
       })
@@ -139,12 +122,10 @@ function ResultScreen({ route, navigation }) {
     backgroundGradientTo: "#ffffff",
     // backgroundGradient: "white",
     decimalPlaces: 0, // 소수점 자릿수
-    color: (opacity = 1) => `rgba(175, 0, 0, ${opacity})`, // 막대 색상
-
-    // color: (opacity = 1) => `rgba(25, 150, 110, ${opacity})`, // 막대 색상
+    color: (opacity = 1) => `rgba(26, 147, 111, ${opacity})`, // 막대 색상
     labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`, // 라벨 텍스트 색상
     strokeWidth: 2, // 막대 두께
-    barPercentage: 0.6, // 막대 너비
+    barPercentage: 0.5, // 막대 너비
   };
 
   useEffect(() => {
@@ -202,68 +183,46 @@ function ResultScreen({ route, navigation }) {
     <>
       {mbtiData ? (
         <>
-          <ViewShot
-            style={styles.container}
-            ref={viewRef}
-            options={{ format: "png", quality: 0.9 }}
-          >
-            <FlatList
-              contentContainerStyle={{ padding: 20 }}
-              data={mbtiData}
-              renderItem={({ item, index }) => MBTIResultList(item, index)}
-              ListHeaderComponent={
-                <>
-                  <View style={styles.result_container}>
-                    <Text style={styles.result_text}>Result</Text>
-                  </View>
-                </>
-              }
-              keyExtractor={(item, index) => index.toString()}
-            />
-          </ViewShot>
-          {/* footer */}
-          {footerFlag ? (
-            <>
-              <View style={styles.footer}>
-                <TouchableOpacity
-                  style={styles.footer_button}
-                  onPress={onCapture}
-                >
-                  <Text style={styles.footer_text}>Share</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={styles.footer_button}
-                  onPress={() => {
-                    navigation.navigate("Home");
-                  }}
-                >
-                  <Text style={styles.footer_text}>뒤로가기</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={styles.footer_button}
-                  onPress={handleFooterFlag}
-                >
-                  <Text style={styles.footer_text}>button</Text>
-                </TouchableOpacity>
-              </View>
-            </>
-          ) : (
-            <View style={styles.footer_menu}>
+          <View>
+            <ViewShot
+              style={styles.container}
+              ref={viewRef}
+              options={{ format: "png", quality: 0.9 }}
+            >
+              <FlatList
+                contentContainerStyle={{ margin: 10 }}
+                data={mbtiData}
+                renderItem={({ item, index }) => MBTIResultList(item, index)}
+                ListHeaderComponent={
+                  <>
+                    <View style={styles.result_container}>
+                      <Text style={styles.result_text}>Result</Text>
+                    </View>
+                  </>
+                }
+                keyExtractor={(item, index) => index.toString()}
+              />
+            </ViewShot>
+            {/* footer */}
+            <View style={styles.sub_container}>
+              <TouchableOpacity style={styles.sub_button} onPress={onCapture}>
+                <Text style={styles.sub_text}>Share</Text>
+              </TouchableOpacity>
               <TouchableOpacity
-                onPress={handleFooterFlag}
-                style={styles.footer_button}
+                style={styles.sub_button}
+                onPress={() => {
+                  navigation.navigate("Home");
+                }}
               >
-                <Text style={styles.footer_text}>Menu</Text>
+                <Text style={styles.sub_text}>뒤로가기</Text>
               </TouchableOpacity>
             </View>
-          )}
+          </View>
         </>
       ) : (
         <>
           <View style={styles.loading_container}>
-            <Loading progress={progress} value={value}></Loading>
-            <Text>Loading...</Text>
-            {/* <Text>Progress: {progress}%</Text> */}
+            <Loading></Loading>
           </View>
         </>
       )}
