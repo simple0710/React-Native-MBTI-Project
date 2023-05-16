@@ -6,6 +6,7 @@ import {
   FlatList,
   View,
   Dimensions,
+  SafeAreaView
 } from "react-native";
 import { BarChart } from "react-native-chart-kit";
 import ViewShot from "react-native-view-shot";
@@ -70,6 +71,7 @@ function ResultScreen({ route, navigation }) {
   const MBTIResultList = (items, index) => {
     return (
       <>
+      <View>
         <TouchableOpacity
           onPress={() => {
             handleViewItem(index);
@@ -77,21 +79,22 @@ function ResultScreen({ route, navigation }) {
         >
           {!viewFlag[index] ? (
             <Text style={styles.toggle_text} key={index}>
-              ▼ {items.name}님의 결과
+              ▼ "{items.name}"님의 결과
             </Text>
           ) : (
             <Text style={styles.toggle_text} key={index}>
-              ▶ {items.name}님의 결과
+              ▶ "{items.name}"님의 결과
             </Text>
           )}
         </TouchableOpacity>
         {!viewFlag[index] && (
-          <View style={styles.container}>
-            <View style={styles.graph_container}>
+          // <View style={styles.container}>
+            // <View style={styles.graph_container}>
               <BarChart
                 data={items}
                 width={Dimensions.get("window").width - 50} // 그래프 사이 간격
                 height={220}
+                style={styles.graph_container}
                 chartConfig={chartConfig}
                 fromZero={true} // 0부터 시작
                 showBarTops={false} // 더 잘 보이게 하는 바 삭제
@@ -101,9 +104,11 @@ function ResultScreen({ route, navigation }) {
                 yAxisSuffix=" %"
                 // withHorizontalLabels={false} // y 라벨 숨기기
               />
-            </View>
-          </View>
+            // </View>
+          // </View>
         )}
+      </View>
+
       </>
     );
   };
@@ -139,7 +144,8 @@ function ResultScreen({ route, navigation }) {
     backgroundGradientTo: "#ffffff",
     // backgroundGradient: "white",
     decimalPlaces: 0, // 소수점 자릿수
-    color: (opacity = 1) => `rgba(175, 0, 0, ${opacity})`, // 막대 색상
+    // color: (opacity = 1) => `rgba(175, 0, 0, ${opacity})`, // 막대 색상
+    color: (opacity = 1) => `rgba(0, 189, 19, ${opacity})`, // 막대 색상
 
     // color: (opacity = 1) => `rgba(25, 150, 110, ${opacity})`, // 막대 색상
     labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`, // 라벨 텍스트 색상
@@ -208,14 +214,15 @@ function ResultScreen({ route, navigation }) {
             options={{ format: "png", quality: 0.9 }}
           >
             <FlatList
-              contentContainerStyle={{ padding: 20 }}
+              // contentContainerStyle={{ padding: 20 }}
+              ListHeaderComponentStyle={{backgroundColor: "rgb(111, 225,187)"}}
               data={mbtiData}
               renderItem={({ item, index }) => MBTIResultList(item, index)}
               ListHeaderComponent={
                 <>
-                  <View style={styles.result_container}>
+                  <SafeAreaView style={styles.result_container}>
                     <Text style={styles.result_text}>Result</Text>
-                  </View>
+                  </SafeAreaView>
                 </>
               }
               keyExtractor={(item, index) => index.toString()}
@@ -248,14 +255,14 @@ function ResultScreen({ route, navigation }) {
               </View>
             </>
           ) : (
-            <View style={styles.footer_menu}>
+            <SafeAreaView style={styles.footer_menu}>
               <TouchableOpacity
                 onPress={handleFooterFlag}
                 style={styles.footer_button}
               >
                 <Text style={styles.footer_text}>Menu</Text>
               </TouchableOpacity>
-            </View>
+            </SafeAreaView>
           )}
         </>
       ) : (

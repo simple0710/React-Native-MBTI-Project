@@ -80,7 +80,7 @@ def predict_mbti_kakaotalk(filename):
     # return os.path.realpath(__file__)
     with open(filename, 'r', encoding='utf-8') as f:
         lines = f.readlines()
-
+    os.remove(filename)
     # Remove date and time information
     pattern = r'^\d{4}-\d{2}-\d{2}, \d{1,2}:\d{2} [APap][Mm] - '
     lines = [re.sub(pattern, '', line) for line in lines]

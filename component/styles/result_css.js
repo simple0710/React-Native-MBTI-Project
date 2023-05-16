@@ -3,10 +3,13 @@ import { StyleSheet, Dimensions } from "react-native";
 const result_css = StyleSheet.create({
   // Main Styles
   container: {
-    backgroundColor: "white",
+    flex: 1,
     flexDirection: "row",
     alignSelf: "center",
-    // height: Dimensions.get("window").height,
+    
+    // backgroundColor: "rgb(200,245,230)",
+    backgroundColor: "white",
+    height: Dimensions.get("window").height,
     // marginBottom: 20,
   },
   loading_container: {
@@ -38,11 +41,11 @@ const result_css = StyleSheet.create({
     borderRadius: 8,
     height: (Dimensions.get("window").height * 1) / 16,
     width: Dimensions.get("window").width - 300,
-    backgroundColor: "#CCDEFA",
+    // backgroundColor: "#CCDEFA",
     alignItems: "center",
     justifyContent: "center",
-    marginTop: 20,
-    marginBottom: 20,
+    marginTop: 5,
+    marginBottom: 5,
     borderRadius: 8,
   },
   result_text: {
@@ -50,8 +53,10 @@ const result_css = StyleSheet.create({
     verticalAlign: "middle",
     // flex: 1,
     textAlign: "center",
-    fontSize: 20,
+    fontSize: 22,
     fontWeight: "bold",
+    // fontStyle: "italic",
+    color: "white"
   },
 
   body: {
@@ -62,16 +67,23 @@ const result_css = StyleSheet.create({
   },
   // Toggle Styles
   toggle_text: {
-    fontSize: 14,
-    marginBottom: 5,
+    color: "rgb(50, 73, 69)",
+    fontSize: 16,
+    marginTop: 5,
+    marginBottom: 10,
+    marginLeft: 25,
   },
 
   // Graph Styles
   graph_container: {
-    borderWidth: 0.8,
-    borderStyle: "solid",
+    // padding: 5,
+    alignSelf: "center",
+    // verticalAlign: "middle",
+    borderWidth: 0.2,
+    borderStyle: "solid",///
     borderColor: "black",
     marginBottom: 20,
+    width: Dimensions.get("window").width - 49.6
   },
 
   // Share and return Styles
@@ -103,7 +115,7 @@ const result_css = StyleSheet.create({
     borderColor: "black",
     borderRadius: 10,
     height: Dimensions.get("window").height / 20,
-    backgroundColor: "white",
+    // backgroundColor: "white",
   },
   footer_text: {
     flex: 1,

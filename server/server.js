@@ -83,50 +83,30 @@ app.get("/test", (req, res) => {
 });
 
 app.post("/upload", upload.single("file"), async (req, res) => {
-  const { originalname, path } = req.file;
-  console.log("upload success");
-  // console.log(path);
-  const newPath = `uploads/${originalname}`;
-  const filePath = "uploads/" + originalname;
-  console.log(originalname);
-
-  // fs.readdirSync("./uploads/", (err, files) => {
-  //   console.log(1111111);
-  //   console.log("files :: ", files);
-  //   if (err) throw err;
-  //   if (files.includes(originalname)) {
-  //     console.log(1);
-  //     fs.unlinkSync("uploads/", (err) => {
-  //       console.log("err");
-  //       return err;
-  //     });
-  //   }
-  // });
   try {
-    fs.renameSync(path, newPath, (err, data) => {
+    const { path, filename } = req.file;
+    console.log("upload success");
+    // console.log(path);
+    const filePath = "uploads/" + filename;
+    console.log(filename);
+    
+    // 파일 
+    fs.renameSync(path, filePath, (err) => {
       if (err) throw err;
     });
+
+    // MBTI 스크립트 실행
     const data = await pyScript(filePath);
 
     // txt 파일 삭제
-    fs.unlinkSync(filePath, (err) => {
-      if (err) throw err;
-    });
+    // fs.unlinkSync(filePath, (err) => {
+    //   if (err) throw err;
+    // });
 
     // console.log(data);
     res.send(data);
   } catch {
     console.log("fail");
-    fs.readdirSync("./uploads/", (err, files) => {
-      console.log(files);
-      if (files.includes(originalname)) {
-        console.log(1);
-      }
-      if (err) {
-        console.error("Error reading directory:", err);
-        return;
-      }
-    });
     res.send("fail");
   }
 });
