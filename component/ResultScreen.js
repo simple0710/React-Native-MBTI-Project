@@ -31,13 +31,6 @@ function ResultScreen({ route, navigation }) {
   const api =
     // "https://port-0-react-native-mbti-project-lme62alhih8uuf.sel4.cloudtype.app";
     "http://10.0.2.2:8080";
-  const handleButtonPress = () => {
-    // 서버에서 값을 받아온다고 가정하고, 값을 받은 후 setProgress를 통해 상태를 업데이트합니다.
-    // 받은 값을 기반으로 화면에 출력할 수 있습니다.
-    // 이 부분은 실제 서버 요청 및 처리 로직에 따라 구현해야 합니다.
-    const receivedValue = 50; // 받은 값
-    setProgress(receivedValue);
-  };
   const flagInsert = (dataLen) => {
     for (let i = 0; i < dataLen; i++) {
       const True = true;
@@ -129,12 +122,18 @@ function ResultScreen({ route, navigation }) {
       .then((res) => {
         if (res.data == "fail") {
           navigation.navigate("Home");
-          alert("re upload");
+          alert("Re Upload");
         }
         // console.log(res.data);
         // console.log(typeof res.data);
         // console.log(res.data);
-        setMbtiData(res.data);
+        if (progress == 99) {
+          console.log(mbtiData);
+          console.log("화면 출력")
+          setProgress(100);
+          clearInterval(interval);
+          setMbtiData(res.data);
+        }
         // console.log(res.data);
       })
       .catch((err) => {
@@ -201,18 +200,36 @@ function ResultScreen({ route, navigation }) {
     // ]);
     if (route && route.params && route.params.data) {
       const formData = route.params.data;
+      getMbtiResult(formData);
+      // 프로그래스 바의 진행 상황을 업데이트하는 코드
+      const interval = setInterval(() => {
+        setProgress((prevProgress) => {
+          const newProgress = prevProgress + Math.floor(Math.random() * 10) + 1;
+        if (prevProgress == 99) {
+          console.log(mbtiData);
+          console.log("화면 출력")
+          setProgress(100);
+          clearInterval(interval);
+        }
+        else {
+          return (newProgress > 99 ? 99 : newProgress);
+        }
+        });
+      }, mbtiData ? 0 : 1500);
+
+        
       // getMbtiResult(paramsData);
       // console.log(paramsData);
       // const listLength = formData.length;
       // console.log("파일 내용 출력", formData._parts);
-      getMbtiResult(formData);
     } else {
       console.log("Not Data");
+      // navigation.navigate("Home");
     }
   }, []);
   return (
     <>
-      {mbtiData ? (
+      {progress == 100 ? (
         <>
           <ViewShot
             style={styles.container}
@@ -277,8 +294,6 @@ function ResultScreen({ route, navigation }) {
         <>
           <View style={styles.loading_container}>
             <Loading progress={progress} value={value}></Loading>
-            <Text>Loading...</Text>
-            {/* <Text>Progress: {progress}%</Text> */}
           </View>
         </>
       )}

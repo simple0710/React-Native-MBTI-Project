@@ -66,7 +66,7 @@ async function pyScript(filePath) {
           };
           MbtiData.push(onePeople);
         });
-        // console.log(MbtiData);
+        console.log(MbtiData);
         resolve(MbtiData);
       }
     );
