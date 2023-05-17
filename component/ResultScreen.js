@@ -6,7 +6,7 @@ import {
   FlatList,
   View,
   Dimensions,
-  SafeAreaView
+  SafeAreaView,
 } from "react-native";
 import { BarChart } from "react-native-chart-kit";
 import ViewShot from "react-native-view-shot";
@@ -23,9 +23,10 @@ function ResultScreen({ route, navigation }) {
   // MBTI 데이터이 길이를 구해 해당 값으로 값을 한다.
   // const [progress, setProgress] = useState(0);
   const [footerFlag, setFooterFlag] = useState(false);
-
+  const [colorFlag, setColorFlag] = useState(0);
   const [viewFlag, setViewFlag] = useState([]);
   const [mbtiData, setMbtiData] = useState("");
+  const test = "red";
   const viewRef = useRef();
   const api =
     // "https://port-0-react-native-mbti-project-lme62alhih8uuf.sel4.cloudtype.app";
@@ -69,27 +70,30 @@ function ResultScreen({ route, navigation }) {
   };
 
   const MBTIResultList = (items, index) => {
+    ["infp"];
+    if (items.labels == "infp") console.log(items);
     return (
       <>
-      <View>
-        <TouchableOpacity
-          onPress={() => {
-            handleViewItem(index);
-          }}
-        >
-          {!viewFlag[index] ? (
-            <Text style={styles.toggle_text} key={index}>
-              ▼ "{items.name}"님의 결과
-            </Text>
-          ) : (
-            <Text style={styles.toggle_text} key={index}>
-              ▶ "{items.name}"님의 결과
-            </Text>
-          )}
-        </TouchableOpacity>
-        {!viewFlag[index] && (
-          // <View style={styles.container}>
+        <View>
+          <TouchableOpacity
+            onPress={() => {
+              handleViewItem(index);
+            }}
+          >
+            {viewFlag[index] ? (
+              <Text style={styles.toggle_text} key={index}>
+                ▼ "{items.name}"님의 결과
+              </Text>
+            ) : (
+              <Text style={styles.toggle_text} key={index}>
+                ▶ "{items.name}"님의 결과
+              </Text>
+            )}
+          </TouchableOpacity>
+          {viewFlag[index] && (
+            // <View style={styles.container}>
             // <View style={styles.graph_container}>
+            <>
               <BarChart
                 data={items}
                 width={Dimensions.get("window").width - 50} // 그래프 사이 간격
@@ -104,11 +108,13 @@ function ResultScreen({ route, navigation }) {
                 yAxisSuffix=" %"
                 // withHorizontalLabels={false} // y 라벨 숨기기
               />
-            // </View>
-          // </View>
-        )}
-      </View>
-
+              <Text style={{ alignSelf: "center" }}>
+                <Text style={{ color: test }}>ISTJ</Text> : 관리자형 -
+                현실주의자
+              </Text>
+            </>
+          )}
+        </View>
       </>
     );
   };
@@ -155,51 +161,51 @@ function ResultScreen({ route, navigation }) {
 
   useEffect(() => {
     setViewFlag([]);
-    setMbtiData([
-      {
-        name: "김찬민",
-        labels: ["INFP", "ISFP", "INTP", "ESFP", "ENTP", "ENTJ", "INTP"],
-        datasets: [
-          {
-            data: [70, 10, 5, 5, 5, 4, 1],
-          },
-        ],
-      },
-      {
-        name: "김찬민 2",
-        labels: ["ISFP", "INFP", "INTP", "ESFP", "ENTP", "ENTJ", "INTP"],
-        datasets: [
-          {
-            data: [60, 10, 5, 5, 5, 4, 1],
-          },
-        ],
-      },
-      {
-        name: "김찬민 3",
-        labels: ["ISFP", "INFP", "INTP", "ESFP", "ENTP", "ENTJ", "INTP"],
-        datasets: [
-          {
-            data: [50, 10, 5, 5, 5, 4, 1],
-          },
-        ],
-      },
-      {
-        name: "김찬민 3",
-        labels: ["ISFP", "INFP", "INTP", "ESFP", "ENTP", "ENTJ", "INTP"],
-        datasets: [
-          {
-            data: [50, 10, 5, 5, 5, 4, 1],
-          },
-        ],
-      },
-    ]);
+    // setMbtiData([
+    //   {
+    //     name: "김찬민",
+    //     labels: ["INFP", "ISFP", "INTP", "ESFP", "ENTP", "ENTJ", "INTP"],
+    //     datasets: [
+    //       {
+    //         data: [70, 10, 5, 5, 5, 4, 1],
+    //       },
+    //     ],
+    //   },
+    //   {
+    //     name: "김찬민 2",
+    //     labels: ["ISFP", "INFP", "INTP", "ESFP", "ENTP", "ENTJ", "INTP"],
+    //     datasets: [
+    //       {
+    //         data: [60, 10, 5, 5, 5, 4, 1],
+    //       },
+    //     ],
+    //   },
+    //   {
+    //     name: "김찬민 3",
+    //     labels: ["ISFP", "INFP", "INTP", "ESFP", "ENTP", "ENTJ", "INTP"],
+    //     datasets: [
+    //       {
+    //         data: [50, 10, 5, 5, 5, 4, 1],
+    //       },
+    //     ],
+    //   },
+    //   {
+    //     name: "김찬민 3",
+    //     labels: ["ISFP", "INFP", "INTP", "ESFP", "ENTP", "ENTJ", "INTP"],
+    //     datasets: [
+    //       {
+    //         data: [50, 10, 5, 5, 5, 4, 1],
+    //       },
+    //     ],
+    //   },
+    // ]);
     if (route && route.params && route.params.data) {
       const formData = route.params.data;
       // getMbtiResult(paramsData);
       // console.log(paramsData);
       // const listLength = formData.length;
       // console.log("파일 내용 출력", formData._parts);
-      // getMbtiResult(formData);
+      getMbtiResult(formData);
     } else {
       console.log("Not Data");
     }
@@ -215,7 +221,9 @@ function ResultScreen({ route, navigation }) {
           >
             <FlatList
               // contentContainerStyle={{ padding: 20 }}
-              ListHeaderComponentStyle={{backgroundColor: "rgb(111, 225,187)"}}
+              ListHeaderComponentStyle={{
+                backgroundColor: "rgb(111, 225,187)",
+              }}
               data={mbtiData}
               renderItem={({ item, index }) => MBTIResultList(item, index)}
               ListHeaderComponent={
@@ -244,13 +252,13 @@ function ResultScreen({ route, navigation }) {
                     navigation.navigate("Home");
                   }}
                 >
-                  <Text style={styles.footer_text}>뒤로가기</Text>
+                  <Text style={styles.footer_text}>Back</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                   style={styles.footer_button}
                   onPress={handleFooterFlag}
                 >
-                  <Text style={styles.footer_text}>button</Text>
+                  <Text style={styles.footer_text}>Menu</Text>
                 </TouchableOpacity>
               </View>
             </>

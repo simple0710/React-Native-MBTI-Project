@@ -22,13 +22,17 @@ const home_css = StyleSheet.create({
     width: Dimensions.get("window").width,
     verticalAlign: "middle",
     textAlign: "center",
-    backgroundColor: "#CCCCCC",
+    // backgroundColor: "#8e001c",
+    // 파랑이
+    backgroundColor: "#99CCFF",
+    // backgroundColor: "#99FF99",
     alignItems: "center",
   },
   logo_text: {
     flex: 1,
     verticalAlign: "middle",
     fontSize: 50,
+    color: "white",
     fontWeight: "bold",
   },
 
@@ -71,7 +75,8 @@ const home_css = StyleSheet.create({
     textAlign: "center",
     // backgroundColor: "#CCCCCC",
     borderTopColor: "black",
-
+    // position: "absolute",
+    // bottom: 0,
     alignItems: "center",
   },
   footer_text: {

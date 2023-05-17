@@ -101,7 +101,9 @@ function HomeScreen({ navigation }) {
           >
             <Text style={styles.upload_text}>File Upload</Text>
           </TouchableOpacity>
-          <Text>{fileTitle ? fileTitle : "입력해주세요"}</Text>
+          <Text>
+            {fileTitle ? fileTitle : "카카오톡 .txt 파일을 업로드 해주세요"}
+          </Text>
 
           {/* MBTI 검사 */}
           <TouchableOpacity
@@ -119,6 +121,9 @@ function HomeScreen({ navigation }) {
           >
             <Text>화면 이동 테스트</Text>
           </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate("Help")}>
+            <Text>도움말</Text>
+          </TouchableOpacity>
           <View style={styles.test}>
             <Text style={styles.test}>Made by BootStrap</Text>
           </View>
@@ -127,7 +132,9 @@ function HomeScreen({ navigation }) {
         {/* Footer */}
         <View style={styles.footer}>
           <Text style={styles.footer_text}>약관</Text>
-          <Text style={styles.footer_text}>copyright</Text>
+          <Text style={styles.footer_text}>
+            ⓒ 2023. BootStrap all rights reserved
+          </Text>
         </View>
       </SafeAreaView>
     </>

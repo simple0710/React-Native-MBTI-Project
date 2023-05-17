@@ -6,6 +6,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 // componenet
 import HomeScreen from "./HomeScreen";
 import ResultScreen from "./ResultScreen";
+import HelpScreen from "./HelpScreen";
 // css
 import styles from "./styles/app_css";
 function App() {
@@ -27,6 +28,11 @@ function App() {
               name="Result"
               component={ResultScreen}
               options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="Help"
+              component={HelpScreen}
+              // options={{ headerShown: false }}
             />
           </Stack.Navigator>
         </NavigationContainer>

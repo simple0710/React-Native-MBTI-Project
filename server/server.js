@@ -22,6 +22,7 @@ async function pyScript(filePath) {
   // console.log(filePath);
   const showLabel = 7; // 화면 출력 MBTI 개수
   const input = filePath;
+  // const pyPath = "pyfile/tensorScript.py";
   const pyPath = "pyfile/tensorScript.py";
   return new Promise((resolve, reject) => {
     exec(
@@ -33,10 +34,11 @@ async function pyScript(filePath) {
           reject(error);
           return;
         }
-        // console.log(stdout)
+        // console.log("출력값 : ", stdout);
+        // console.log("타입 : ", typeof stdout);
         const dict = stdout;
         const dictObject = JSON.parse(dict); // JSON 형태로 변형
-        // console.log(dictObject)
+        // console.log(dictObject);
         // console.log(typeof dictObject);
         const MbtiData = [];
         Object.entries(dictObject).forEach(([key, value]) => {
@@ -89,8 +91,8 @@ app.post("/upload", upload.single("file"), async (req, res) => {
     // console.log(path);
     const filePath = "uploads/" + filename;
     console.log(filename);
-    
-    // 파일 
+
+    // 파일
     fs.renameSync(path, filePath, (err) => {
       if (err) throw err;
     });

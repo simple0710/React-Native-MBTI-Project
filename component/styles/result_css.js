@@ -6,11 +6,11 @@ const result_css = StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     alignSelf: "center",
-    
+
     // backgroundColor: "rgb(200,245,230)",
     backgroundColor: "white",
     height: Dimensions.get("window").height,
-    // marginBottom: 20,
+    marginBottom: 20,
   },
   loading_container: {
     flex: 1,
@@ -45,7 +45,7 @@ const result_css = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginTop: 5,
-    marginBottom: 5,
+    // marginBottom: 5,
     borderRadius: 8,
   },
   result_text: {
@@ -56,7 +56,7 @@ const result_css = StyleSheet.create({
     fontSize: 22,
     fontWeight: "bold",
     // fontStyle: "italic",
-    color: "white"
+    color: "white",
   },
 
   body: {
@@ -68,7 +68,7 @@ const result_css = StyleSheet.create({
   // Toggle Styles
   toggle_text: {
     color: "rgb(50, 73, 69)",
-    fontSize: 16,
+    fontSize: 15,
     marginTop: 5,
     marginBottom: 10,
     marginLeft: 25,
@@ -80,10 +80,10 @@ const result_css = StyleSheet.create({
     alignSelf: "center",
     // verticalAlign: "middle",
     borderWidth: 0.2,
-    borderStyle: "solid",///
+    borderStyle: "solid", ///
     borderColor: "black",
     marginBottom: 20,
-    width: Dimensions.get("window").width - 49.6
+    width: Dimensions.get("window").width - 49.6,
   },
 
   // Share and return Styles
