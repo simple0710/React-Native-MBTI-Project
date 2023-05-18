@@ -1,17 +1,11 @@
 // HomeScreen.js
 import React, { useState, useEffect } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-  ToastAndroid,
-  SafeAreaView,
-} from "react-native";
+import { View, ToastAndroid, SafeAreaView, Dimensions } from "react-native";
+import { Button, Text, DefaultTheme } from "react-native-paper";
 import DocumentPicker from "react-native-document-picker";
 import axios from "axios";
 // css
-import styles from "./styles/home_css";
+// import styles from "./styles/home_css";
 // component
 
 function HomeScreen({ navigation }) {
@@ -19,6 +13,14 @@ function HomeScreen({ navigation }) {
   const [mbtiResult, setMbtiResult] = useState("");
   const [uri, setUri] = useState("");
   const [loading, setLoading] = useState("");
+  const theme = {
+    ...DefaultTheme,
+    colors: {
+      ...DefaultTheme.colors,
+      primary: "blue",
+    },
+  };
+
   const api =
     // "https://port-0-react-native-mbti-project-lme62alhih8uuf.sel4.cloudtype.app";
     "http://10.0.2.2:8080";
@@ -53,6 +55,7 @@ function HomeScreen({ navigation }) {
       }
     }
   };
+
   /** MBTI 결과 받아오기
    ** 파일을 올려둔 경우
    * fileContent가 있는 경우
@@ -86,55 +89,73 @@ function HomeScreen({ navigation }) {
   }, []);
   return (
     <>
-      <SafeAreaView style={styles.container}>
+      <SafeAreaView
+        style={{ flex: 1, alignItems: "center", alignContent: "center" }}
+      >
         {/* Title */}
-        <View style={styles.header}>
-          <Text style={styles.logo_text}>KIU:TI</Text>
+        <View
+          style={{
+            backgroundColor: "black",
+            alignItems: "center",
+            justifyContent: "center",
+            width: Dimensions.get("window").width,
+            flex: 0.4,
+          }}
+        >
+          <Text style={{ fontSize: 40, color: "white" }}>KIU:TI</Text>
         </View>
 
         {/* Body */}
-        <View style={styles.body}>
+        <View
+          style={{
+            flex: 0.6,
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
           {/* 파일 업로드 */}
-          <TouchableOpacity
+          <Button
             onPress={pickFile}
-            style={StyleSheet.compose(styles.button, styles.upload)}
+            style={{
+              backgroundColor: "white",
+              width: Dimensions.get("window").width - 200,
+            }}
           >
-            <Text style={styles.upload_text}>File Upload</Text>
-          </TouchableOpacity>
-          <Text>
+            <Text>File Upload</Text>
+          </Button>
+          <Text style={{ marginBottom: 20 }}>
             {fileTitle ? fileTitle : "카카오톡 .txt 파일을 업로드 해주세요"}
           </Text>
 
           {/* MBTI 검사 */}
-          <TouchableOpacity
+          <Button
             onPress={getMbtiResult}
-            style={StyleSheet.compose(styles.button, styles.check)}
+            style={{
+              backgroundColor: "white",
+              width: Dimensions.get("window").width - 250,
+              marginBottom: 40,
+            }}
           >
-            <Text style={styles.check_text}>Check</Text>
-          </TouchableOpacity>
-          <Text>{mbtiResult}</Text>
+            <Text>Check</Text>
+          </Button>
 
           {/* 테스트 */}
-          <TouchableOpacity
-            title="Login"
-            onPress={() => navigation.navigate("Result")}
-          >
+          <Button title="Login" onPress={() => navigation.navigate("Result")}>
             <Text>화면 이동 테스트</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => navigation.navigate("Help")}>
+          </Button>
+          <Button
+            onPress={() => navigation.navigate("Help")}
+            style={{ backgroundColor: "white" }}
+          >
             <Text>도움말</Text>
-          </TouchableOpacity>
-          <View style={styles.test}>
-            <Text style={styles.test}>Made by BootStrap</Text>
-          </View>
+          </Button>
+          <View>{/* <Text>Made by BootStrap</Text> */}</View>
         </View>
 
         {/* Footer */}
-        <View style={styles.footer}>
-          <Text style={styles.footer_text}>약관</Text>
-          <Text style={styles.footer_text}>
-            ⓒ 2023. BootStrap all rights reserved
-          </Text>
+        <View style={{ position: "absolute", bottom: 0, alignItems: "center" }}>
+          <Text>약관</Text>
+          <Text>ⓒ 2023. BootStrap all rights reserved</Text>
         </View>
       </SafeAreaView>
     </>

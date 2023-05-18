@@ -52,7 +52,7 @@ async function pyScript(filePath) {
           const v = JSON.parse(lis);
 
           for (let i = 0; i < showLabel; i++) {
-            labels.push(v[i][0]);
+            labels.push(v[i][0].toUpperCase());
             data.push(parseInt(v[i][1] * 100));
           }
           const onePeople = {

@@ -10,7 +10,6 @@ const result_css = StyleSheet.create({
     // backgroundColor: "rgb(200,245,230)",
     backgroundColor: "white",
     height: Dimensions.get("window").height,
-    marginBottom: 20,
   },
   loading_container: {
     flex: 1,
