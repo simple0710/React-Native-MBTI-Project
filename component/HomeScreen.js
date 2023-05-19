@@ -1,7 +1,7 @@
 // HomeScreen.js
 import React, { useState, useEffect } from "react";
 import { View, ToastAndroid, SafeAreaView, Dimensions } from "react-native";
-import { Button, Text, DefaultTheme } from "react-native-paper";
+import { Button, Text } from "react-native-paper";
 import DocumentPicker from "react-native-document-picker";
 import axios from "axios";
 // css

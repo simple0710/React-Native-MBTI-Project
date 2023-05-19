@@ -1,13 +1,15 @@
-// App.js
+// // App.js
 import React from "react";
 import { SafeAreaView, Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
-// componenet
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+// // componenet
 import HomeScreen from "./HomeScreen";
 import ResultScreen from "./ResultScreen";
-import HelpScreen from "./HelpScreen";
-// css
+// import HelpScreen from "./HelpScreen";
+// // css
 import styles from "./styles/app_css";
+import HelpScreen from "./HelpScreen";
 const Stack = createNativeStackNavigator();
 
 function App() {

@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@eva-design/eva": "^2.2.0",
+    "@react-native-community/viewpager": "^5.0.11",
+    "@react-navigation/material-top-tabs": "^6.6.2",
     "@react-navigation/native": "^6.1.6",
     "@react-navigation/native-stack": "^6.9.12",
     "@ui-kitten/components": "^5.3.1",

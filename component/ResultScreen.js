@@ -98,44 +98,44 @@ function ResultScreen({ route, navigation }) {
 
   useEffect(() => {
     setViewFlag([]);
-    // setMbtiData([
-    //   {
-    //     name: "김찬민",
-    //     labels: ["INFP", "ISFP", "INTP", "ESFP", "ENTP", "ENTJ", "INTP"],
-    //     datasets: [
-    //       {
-    //         data: [70, 10, 5, 5, 5, 4, 1],
-    //       },
-    //     ],
-    //   },
-    //   {
-    //     name: "김찬민 2",
-    //     labels: ["ISFP", "INFP", "INTP", "ESFP", "ENTP", "ENTJ", "INTP"],
-    //     datasets: [
-    //       {
-    //         data: [60, 10, 5, 5, 5, 4, 1],
-    //       },
-    //     ],
-    //   },
-    //   {
-    //     name: "김찬민 3",
-    //     labels: ["ISFP", "INFP", "INTP", "ESFP", "ENTP", "ENTJ", "INTP"],
-    //     datasets: [
-    //       {
-    //         data: [50, 10, 5, 5, 5, 4, 1],
-    //       },
-    //     ],
-    //   },
-    //   {
-    //     name: "김찬민 3",
-    //     labels: ["ISFP", "INFP", "INTP", "ESFP", "ENTP", "ENTJ", "INTP"],
-    //     datasets: [
-    //       {
-    //         data: [50, 10, 5, 5, 5, 4, 1],
-    //       },
-    //     ],
-    //   },
-    // ]);
+    setMbtiData([
+      {
+        name: "김찬민",
+        labels: ["INFP", "ISFP", "INTP", "ESFP", "ENTP", "ENTJ", "INTP"],
+        datasets: [
+          {
+            data: [70, 10, 5, 5, 5, 4, 1],
+          },
+        ],
+      },
+      {
+        name: "김찬민 2",
+        labels: ["ISFP", "INFP", "INTP", "ESFP", "ENTP", "ENTJ", "INTP"],
+        datasets: [
+          {
+            data: [60, 10, 5, 5, 5, 4, 1],
+          },
+        ],
+      },
+      {
+        name: "김찬민 3",
+        labels: ["ISFP", "INFP", "INTP", "ESFP", "ENTP", "ENTJ", "INTP"],
+        datasets: [
+          {
+            data: [50, 10, 5, 5, 5, 4, 1],
+          },
+        ],
+      },
+      {
+        name: "김찬민 3",
+        labels: ["ISFP", "INFP", "INTP", "ESFP", "ENTP", "ENTJ", "INTP"],
+        datasets: [
+          {
+            data: [50, 10, 5, 5, 5, 4, 1],
+          },
+        ],
+      },
+    ]);
     if (route && route.params && route.params.data) {
       const formData = route.params.data;
       getMbtiResult(formData);
