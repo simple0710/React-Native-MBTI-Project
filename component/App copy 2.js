@@ -6,6 +6,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 // componenet
 import HomeScreen from "./HomeScreen";
 import ResultScreen from "./ResultScreen";
+import HelpScreen from "./HelpScreen";
 // css
 import styles from "./styles/app_css";
 function App() {
@@ -13,9 +14,6 @@ function App() {
   return (
     <>
       <SafeAreaView style={styles.main_container}>
-        {/* <View style={styles.header}>
-          <Text style={styles.logo_text}>KIU:TI</Text>
-        </View> */}
         <View style={styles.router}>
           <NavigationContainer>
             <Stack.Navigator initialRouteName="Router">
@@ -27,6 +25,11 @@ function App() {
               <Stack.Screen
                 name="Result"
                 component={ResultScreen}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="Help"
+                component={HelpScreen}
                 options={{ headerShown: false }}
               />
             </Stack.Navigator>

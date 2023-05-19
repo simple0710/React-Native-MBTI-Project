@@ -10,16 +10,15 @@ import axios from "axios";
 
 function HomeScreen({ navigation }) {
   const [fileTitle, setFileTitle] = useState("");
-  const [mbtiResult, setMbtiResult] = useState("");
   const [uri, setUri] = useState("");
   const [loading, setLoading] = useState("");
-  const theme = {
-    ...DefaultTheme,
-    colors: {
-      ...DefaultTheme.colors,
-      primary: "blue",
-    },
-  };
+  // const theme = {
+  //   ...DefaultTheme,
+  //   colors: {
+  //     ...DefaultTheme.colors,
+  //     primary: "blue",
+  //   },
+  // };
 
   const api =
     // "https://port-0-react-native-mbti-project-lme62alhih8uuf.sel4.cloudtype.app";

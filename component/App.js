@@ -2,21 +2,18 @@
 import React from "react";
 import { SafeAreaView, Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
 // componenet
 import HomeScreen from "./HomeScreen";
 import ResultScreen from "./ResultScreen";
 import HelpScreen from "./HelpScreen";
 // css
 import styles from "./styles/app_css";
+const Stack = createNativeStackNavigator();
+
 function App() {
-  const Stack = createNativeStackNavigator();
   return (
     <>
       <SafeAreaView style={styles.main_container}>
-        {/* <View style={styles.header}>
-          <Text style={styles.logo_text}>KIU:TI</Text>
-        </View> */}
         <View style={styles.router}>
           <NavigationContainer>
             <Stack.Navigator initialRouteName="Router">
