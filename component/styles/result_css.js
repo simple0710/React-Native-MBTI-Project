@@ -45,7 +45,6 @@ const result_css = StyleSheet.create({
     justifyContent: "center",
     marginTop: 5,
     // marginBottom: 5,
-    borderRadius: 8,
   },
   result_text: {
     alignItems: "center",

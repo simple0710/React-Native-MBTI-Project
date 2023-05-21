@@ -1,9 +1,8 @@
 // HomeScreen.js
-import React, { useState, useEffect } from "react";
-import { View, ToastAndroid, SafeAreaView, Dimensions } from "react-native";
+import React, { useRef, useState, useEffect } from "react";
+import { Animated, StyleSheet, View, ToastAndroid, SafeAreaView, Dimensions, TouchableOpacity } from "react-native";
 import { Button, Text } from "react-native-paper";
 import DocumentPicker from "react-native-document-picker";
-import axios from "axios";
 // css
 // import styles from "./styles/home_css";
 // component
@@ -12,6 +11,28 @@ function HomeScreen({ navigation }) {
   const [fileTitle, setFileTitle] = useState("");
   const [uri, setUri] = useState("");
   const [loading, setLoading] = useState("");
+  const [sideFlag, setSideFlag] = useState(false);
+  const animatedValue = useRef(new Animated.Value(0)).current;
+  
+  const startAnimation = () => {
+    Animated.timing(animatedValue, {
+      toValue: 1,
+      duration: 1000,
+      useNativeDriver: true,
+    }).start();
+  }
+
+  const animatedStyle = {
+    opacity : animatedValue,
+    transform: [
+        {
+        translateY: animatedValue.interpolate({
+          inputRange: [0, 1],
+          outputRange: [100, 0],
+        }),
+      }
+    ]
+  }
   // const theme = {
   //   ...DefaultTheme,
   //   colors: {
@@ -21,7 +42,7 @@ function HomeScreen({ navigation }) {
   // };
 
   const api =
-    // "https://port-0-react-native-mbti-project-lme62alhih8uuf.sel4.cloudtype.app";
+    // "https://port-0-react-native-mbti-projsect-lme62alhih8uuf.sel4.cloudtype.app";
     "http://10.0.2.2:8080";
   const pickFile = async () => {
     try {
@@ -60,6 +81,10 @@ function HomeScreen({ navigation }) {
    * fileContent가 있는 경우
    *
    */
+  const confingHandler = () => {
+    setSideFlag((state) => !state)
+  }
+
   const getMbtiResult = async () => {
     try {
       if (fileTitle) {
@@ -102,9 +127,60 @@ function HomeScreen({ navigation }) {
           }}
         >
           <Text style={{ fontSize: 40, color: "white" }}>KIU:TI</Text>
+          <Text 
+          style={{position: "absolute", top:0, right:0,backgroundColor: "white"}} 
+          onPress={() => {
+            setSideFlag((state) => !state)
+            console.log(sideFlag)
+            startAnimation();
+          }}
+          >설정</Text>
+        </View >
+        {/* Body */}
+        
+        {sideFlag && 
+        // <View><Text>g</Text></View>
+        <View style={{zIndex:1, position:"absolute", backgroundColor: "rgba(0, 0, 0, 0.25)", width: Dimensions.get("window").width, height: Dimensions.get("window").height}} 
+        >
+        <TouchableOpacity 
+        onPress={confingHandler}
+        activeOpacity={2}
+        style={{flex: 1}}>
+
+        </TouchableOpacity>
+        
+        <View
+        activeOpacity={2}
+        style={{
+          flex: 1,
+          position: "absolute", 
+          top: 0, 
+          right: 0, 
+          height: Dimensions.get("window").height, 
+          width:Dimensions.get("window").width / 2 ,backgroundColor: "white"
+        , alignItems:"center"
+        , alignContent:"center"
+        }}>
+          <View style={{zIndex: 2, flex: 0.05, backgroundColor: "blue", width:Dimensions.get("window").width / 2
+          , justifyContent: "center"
+          , alignItems: "center"
+        }}>
+            <Text
+            onPress={confingHandler}
+            >상세 정보</Text>
+          </View>
+          <View style={{flex: 0.9, 
+          // width: Dimensions.get("window").width / 2
+          }}>
+            <Text>버전</Text>
+            <Text>버전</Text>
+            <Text>버전</Text>
+          </View>
+        </View>
         </View>
 
-        {/* Body */}
+      }
+
         <View
           style={{
             flex: 0.6,

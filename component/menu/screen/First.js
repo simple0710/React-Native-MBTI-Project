@@ -1,5 +1,5 @@
 // First.js
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import { FlatList, View, Dimensions, SafeAreaView } from "react-native";
 import { Button, Text, DefaultTheme } from "react-native-paper";
 
@@ -12,11 +12,11 @@ const First = ({ route }) => {
   const [viewFlag, setViewFlag] = useState([]);
 
   // 토글 기능 수행
-  const handleViewItem = (index) => {
+  const handleViewItem = useCallback ((index) => {
     let flagCopy = [...viewFlag];
     flagCopy[index] = !flagCopy[index];
     setViewFlag(flagCopy);
-  };
+  });
 
   const mbtiColor = [
     [
@@ -52,12 +52,13 @@ const First = ({ route }) => {
       "탐험가형",
     ],
   ];
-  const MBTIResultList = (items, index) => {
+  const MBTIResultList = useCallback ((items, index) => {
     let color = "black";
     let mbtiTextType1 = "";
     let mbtiTextType2 = "";
     for (let i = 0; i < mbtiColor.length; i++) {
       for (let j = 0; j < mbtiColor[i].length; j++) {
+        // 적절한 유형에 매치한다.
         if (mbtiColor[i][j][0] == items.labels[0]) {
           color = mbtiColor[i][4];
           mbtiTextType1 = mbtiColor[i][5];
@@ -116,7 +117,7 @@ const First = ({ route }) => {
         </SafeAreaView>
       </>
     );
-  };
+  });
 
   // BarChart 설정
   const chartConfig = {
