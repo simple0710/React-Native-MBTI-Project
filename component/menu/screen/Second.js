@@ -45,7 +45,7 @@ const Second = ({ route } ) => {
     }
     // console.log(mbtiMatch.backcolor[mbtiMatch.graph[mbtiMatch.labels[item.labels[0]]][8]])
     // console.log(mbtiMatch.backcolor[mbtiMatch.graph[mbtiMatch.labels[item.labels[0]]]["INFP"]])
-    console.log(mbtiMatch.backcolor[mbtiMatch.graph[mbtiMatch.labels[nowMbti]][mbtiMatch.labels[item.labels[0]]]])
+    // console.log(mbtiMatch.backcolor[mbtiMatch.graph[mbtiMatch.labels[nowMbti]][mbtiMatch.labels[item.labels[0]]]])
     if (clickName != item.name) {
       return (
         <>
