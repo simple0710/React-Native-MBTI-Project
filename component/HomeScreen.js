@@ -1,6 +1,6 @@
 // HomeScreen.js
 import React, { useRef, useState, useEffect } from "react";
-import { Animated, StyleSheet, View, ToastAndroid, SafeAreaView, Dimensions, TouchableOpacity } from "react-native";
+import { Animated, StyleSheet, View, ToastAndroid, SafeAreaView, Dimensions, TouchableOpacity, Linking } from "react-native";
 import { Button, Text } from "react-native-paper";
 import DocumentPicker from "react-native-document-picker";
 // css
@@ -161,7 +161,7 @@ function HomeScreen({ navigation }) {
         , alignItems:"center"
         , alignContent:"center"
         }}>
-          <View style={{zIndex: 2, flex: 0.05, backgroundColor: "blue", width:Dimensions.get("window").width / 2
+          <View style={{zIndex: 2, flex: 0.05, backgroundColor: "grey", width:Dimensions.get("window").width / 2
           , justifyContent: "center"
           , alignItems: "center"
         }}>
@@ -169,12 +169,14 @@ function HomeScreen({ navigation }) {
             onPress={confingHandler}
             >상세 정보</Text>
           </View>
-          <View style={{flex: 0.9, 
+          <View style={{flex: 0.9,
+          alignItems: "center"
           // width: Dimensions.get("window").width / 2
           }}>
-            <Text>버전</Text>
-            <Text>버전</Text>
-            <Text>버전</Text>
+            <Text style={{marginTop: 5, marginBottom: 5}}>version : 0.0.1</Text>
+            <TouchableOpacity onPress={() => {
+              Linking.openURL('https://sites.google.com/view/kiuti');
+            }}><Text style={{borderBottomColor: "black", borderBottomWidth: 1, borderStyle: "solid"}}>개인정보처리방침</Text></TouchableOpacity>
           </View>
         </View>
         </View>

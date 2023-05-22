@@ -62,6 +62,9 @@ const First = ({ route }) => {
     let mbtiTextType1 = "";
     let mbtiTextType2 = "";
     for (let i = 0; i < mbtiColor.length; i++) {
+      if (mbtiTextType1) {
+        break
+      }
       for (let j = 0; j < mbtiColor[i].length; j++) {
         // 적절한 유형에 매치한다.
         if (mbtiColor[i][j][0] == items.labels[0]) {
@@ -125,7 +128,7 @@ const First = ({ route }) => {
                   marginBottom: 5,
                 }}
               >
-                <Text>장점</Text>
+                <Text>특징</Text>
                 <Text>1. test</Text>
                 <Text>2. test2</Text>
                 <Text>3. test3</Text>
