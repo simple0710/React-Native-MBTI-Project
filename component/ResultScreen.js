@@ -1,7 +1,7 @@
 // ResultScreen.js
 import React, { useState, useEffect } from "react";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
-
+import { Text } from "react-native-paper";
 import { Dimensions, SafeAreaView, View } from "react-native";
 import axios from "axios";
 // css
@@ -98,6 +98,7 @@ function ResultScreen({ route, navigation }) {
 
   useEffect(() => {
     setViewFlag([]);
+    // setProgress(100);
     // setMbtiData([
     //   {
     //     name: "김찬민",
@@ -149,6 +150,7 @@ function ResultScreen({ route, navigation }) {
     <>
       {finalProgress == 100 && mbtiData ? (
         <>
+          <Text style={{ position: "absolute", bottom: 0 }}>test</Text>
           <SafeAreaView style={{ flex: 1 }}>
             <Tab.Navigator
               initialRouteName="First"
@@ -167,15 +169,13 @@ function ResultScreen({ route, navigation }) {
                 component={First}
                 initialParams={{ mbtiData }}
               />
-              <Tab.Screen name="Second" component={Second} initialParams={{mbtiData}} />
-              {/* <Tab.Screen name="Third" component={Second} /> */}
+              <Tab.Screen
+                name="Second"
+                component={Second}
+                initialParams={{ mbtiData }}
+              />
             </Tab.Navigator>
           </SafeAreaView>
-          {/* <First mbtiData={mbtiData}></First> */}
-          {/* <View style={{ flex: 0.05 }}>
-            <BottomMenu></BottomMenu>
-          </View> */}
-          {/* footer */}
         </>
       ) : (
         <>

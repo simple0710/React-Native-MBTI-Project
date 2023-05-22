@@ -4,6 +4,7 @@ import { FlatList, View, Dimensions, SafeAreaView } from "react-native";
 import { Button, Text, DefaultTheme } from "react-native-paper";
 
 import { BarChart } from "react-native-chart-kit";
+import MatchGraph from "./graph/MatchGraph";
 // css
 // import styles from "./styles/result_css";
 
@@ -12,12 +13,15 @@ const First = ({ route }) => {
   const [viewFlag, setViewFlag] = useState([]);
 
   // 토글 기능 수행
-  const handleViewItem = useCallback ((index) => {
+  const handleViewItem = useCallback((index) => {
     let flagCopy = [...viewFlag];
     flagCopy[index] = !flagCopy[index];
     setViewFlag(flagCopy);
   });
 
+  /**
+   * MBTI Color 지정
+   */
   const mbtiColor = [
     [
       ["INTJ", "논리술사"],
@@ -52,7 +56,8 @@ const First = ({ route }) => {
       "탐험가형",
     ],
   ];
-  const MBTIResultList = useCallback ((items, index) => {
+
+  const MBTIResultList = useCallback((items, index) => {
     let color = "black";
     let mbtiTextType1 = "";
     let mbtiTextType2 = "";
@@ -82,13 +87,13 @@ const First = ({ route }) => {
             }}
             style={{ alignSelf: "flex-start" }}
           >
-            {!viewFlag[index] ? (
+            {viewFlag[index] ? (
               <Text key={index}>▼ "{items.name}"님의 결과</Text>
             ) : (
               <Text key={index}>▶ "{items.name}"님의 결과</Text>
             )}
           </Button>
-          {!viewFlag[index] && (
+          {viewFlag[index] && (
             <>
               <View>
                 <BarChart
@@ -112,6 +117,24 @@ const First = ({ route }) => {
                   {mbtiTextType1} - {mbtiTextType2}
                 </Text>
               </View>
+              <View
+                style={{
+                  width: "90%",
+                  // backgroundColor: "blue",
+                  alignSelf: "center",
+                  marginBottom: 5,
+                }}
+              >
+                <Text>장점</Text>
+                <Text>1. test</Text>
+                <Text>2. test2</Text>
+                <Text>3. test3</Text>
+              </View>
+              <MatchGraph
+                mbtiData={mbtiData}
+                myName={items.name}
+                myMbti={items.labels[0]}
+              ></MatchGraph>
             </>
           )}
         </SafeAreaView>
@@ -145,16 +168,6 @@ const First = ({ route }) => {
           }}
         >
           <FlatList
-            // ListHeaderComponentStyle={{
-            //   backgroundColor: "rgb(111, 225,187)",
-            //   alignItems: "center",
-            //   justifyContent: "center",
-            //   backgroundColor: "white",
-            //   borderBottomColor: "black",
-            //   // width: Dimensions.get("window").width,
-            //   borderBottomWidth: 1,
-            //   marginBottom: 20,
-            // }}
             data={mbtiData}
             renderItem={({ item, index }) => MBTIResultList(item, index)}
             ListHeaderComponent={
