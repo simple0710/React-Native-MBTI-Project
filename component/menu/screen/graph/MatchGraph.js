@@ -132,7 +132,7 @@ const MatchGraph = ({ mbtiData, myName, myMbti }) => {
             flex: 1,
             width: "50%",
             borderColor: "black",
-            borderWidth: 1,
+            borderWidth: 0.8,
             borderStyle: "solid",
           }}
           ListHeaderComponent={<Text>Match</Text>}

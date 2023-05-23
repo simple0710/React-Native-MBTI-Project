@@ -6,7 +6,6 @@ import { Dimensions, SafeAreaView, View } from "react-native";
 import axios from "axios";
 // css
 import Loading from "./Loading";
-import BottomMenu from "./menu/BottomMenu";
 import First from "./menu/screen/First";
 import Second from "./menu/screen/Second";
 
@@ -20,9 +19,9 @@ function ResultScreen({ route, navigation }) {
   const [viewFlag, setViewFlag] = useState([]);
   const [mbtiData, setMbtiData] = useState("");
 
-  const api = "http://10.0.2.2:3000";
+  // const api = "http://10.0.2.2:3000";
   // "https://port-0-react-native-mbti-project-lme62alhih8uuf.sel4.cloudtype.app";
-  // const api = "http://kiuti.iptime.org:3000";
+  const api = "http://kiuti.iptime.org:3000";
 
   const getMbtiResult = async (formData) => {
     await axios
@@ -34,7 +33,7 @@ function ResultScreen({ route, navigation }) {
       .then((res) => {
         if (res.data == "fail") {
           navigation.navigate("Home");
-          alert("Re Upload");
+          alert("Upload Fail");
         }
         setMbtiData(res.data);
       })
@@ -98,52 +97,53 @@ function ResultScreen({ route, navigation }) {
 
   useEffect(() => {
     setViewFlag([]);
-    setProgress(100);
-    setMbtiData([
-      {
-        name: "김찬민",
-        labels: ["INFP", "ISFP", "INTP", "ESFP", "ENTP", "ENTJ", "INTP"],
-        datasets: [
-          {
-            data: [70, 10, 5, 5, 5, 4, 1],
-          },
-        ],
-      },
-      {
-        name: "김찬민 2",
-        labels: ["ISFP", "INFP", "INTP", "ESFP", "ENTP", "ENTJ", "INTP"],
-        datasets: [
-          {
-            data: [60, 10, 5, 5, 5, 4, 1],
-          },
-        ],
-      },
-      {
-        name: "김찬민 3",
-        labels: ["ESFP", "INFP", "INTP", "ESFP", "ENTP", "ENTJ", "INTP"],
-        datasets: [
-          {
-            data: [50, 10, 5, 5, 5, 4, 1],
-          },
-        ],
-      },
-      {
-        name: "김찬민 4",
-        labels: ["ISTP", "INFP", "INTP", "ESFP", "ENTP", "ENTJ", "INTP"],
-        datasets: [
-          {
-            data: [50, 10, 5, 5, 5, 4, 1],
-          },
-        ],
-      },
-    ]);
+    // setProgress(100);
+    // setMbtiData([
+    //   {
+    //     name: "김찬민",
+    //     labels: ["INFP", "ISFP", "INTP", "ESFP", "ENTP", "ENTJ", "INTP"],
+    //     datasets: [
+    //       {
+    //         data: [70, 10, 5, 5, 5, 4, 1],
+    //       },
+    //     ],
+    //   },
+    //   {
+    //     name: "김찬민 2",
+    //     labels: ["ISFP", "INFP", "INTP", "ESFP", "ENTP", "ENTJ", "INTP"],
+    //     datasets: [
+    //       {
+    //         data: [60, 10, 5, 5, 5, 4, 1],
+    //       },
+    //     ],
+    //   },
+    //   {
+    //     name: "김찬민 3",
+    //     labels: ["ESFP", "INFP", "INTP", "ESFP", "ENTP", "ENTJ", "INTP"],
+    //     datasets: [
+    //       {
+    //         data: [50, 10, 5, 5, 5, 4, 1],
+    //       },
+    //     ],
+    //   },
+    //   {
+    //     name: "김찬민 4",
+    //     labels: ["ISTP", "INFP", "INTP", "ESFP", "ENTP", "ENTJ", "INTP"],
+    //     datasets: [
+    //       {
+    //         data: [50, 10, 5, 5, 5, 4, 1],
+    //       },
+    //     ],
+    //   },
+    // ]);
     if (route && route.params && route.params.data) {
       const formData = route.params.data;
       getMbtiResult(formData);
       // 프로그래스 바의 진행 상황을 업데이트하는 코드
     } else {
-      console.log("Empty Data");
-      // navigation.navigate("Home");
+      // console.log("Empty Data");
+      alert("Empty Data");
+      navigation.navigate("Home");
     }
   }, []);
   return (

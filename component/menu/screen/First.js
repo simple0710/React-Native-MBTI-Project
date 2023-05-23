@@ -225,6 +225,7 @@ const First = ({ mbtiData }) => {
                     borderBottomWidth: 0.6,
                     borderStyle: "solid",
                     fontSize: 16,
+                    marginBottom: 5,
                   }}
                 >
                   궁합표
