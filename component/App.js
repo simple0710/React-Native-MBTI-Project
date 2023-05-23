@@ -27,12 +27,18 @@ function App() {
               <Stack.Screen
                 name="Result"
                 component={ResultScreen}
-                options={{ headerShown: false }}
+                // options={{ headerShown: false }}
+                options={{
+                  headerTitleAlign: "center",
+                }}
               />
               <Stack.Screen
                 name="Help"
                 component={HelpScreen}
-                options={{ headerShown: false }}
+                options={{
+                  headerTitleAlign: "center",
+                }}
+                // options={{ headerShown: false }}
               />
             </Stack.Navigator>
           </NavigationContainer>

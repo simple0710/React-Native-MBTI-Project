@@ -73,8 +73,11 @@ async function pyScript(filePath) {
   });
 }
 
-app.listen(8080, () => {
-  console.log("listening on 8080");
+const port = 3000;
+const hostname = "0.0.0.0";
+
+app.listen(3000, hostname, () => {
+  console.log(`Server running at http://${hostname}:${port}/`);
 });
 
 // 확인

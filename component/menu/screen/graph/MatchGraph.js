@@ -41,7 +41,7 @@ const MatchGraph = ({ mbtiData, myName, myMbti }) => {
       [1, 1, 1, 1, 2, 3, 2, 2, 3, 5, 3, 5, 4, 4, 4, 4],
       [1, 1, 1, 1, 2, 3, 5, 2, 3, 5, 3, 5, 4, 4, 4, 4],
     ],
-    backcolor: [0, "red", "yellow", "pink", "green", "blue"],
+    backcolor: [0, "#95E1D3", "#EAFFD0", "#CCCCCC", "#FCE38A", "#F38181"], // 좋은것 부터 내림차순
   };
   const renderMatch = ({ item }) => {
     // for (let i = 0; i < mbtiData.length; i++) {
@@ -55,30 +55,38 @@ const MatchGraph = ({ mbtiData, myName, myMbti }) => {
               // width: "100%",
               // flexDirection: "row",
               // backgroundColor: "blue",
-              // justifyContent: "center",
+              // justifyContent: "space-around",
               // alignItems: "center",
-              // borderColor: "black",
-              // borderWidth: 1,
-              // borderStyle: "solid",
-              margin: 2,
+              // borderTopWidth: 0.5,
+              borderColor: "black",
+              borderBottomWidth: 0.5,
+              borderStyle: "solid",
+              // marginTop: 2,
+              // marginBottom: 2,
             }}
           >
             <View
               style={{
+                flex: 1,
                 flexDirection: "row",
                 // width: "30%",
-                justifyContent: "space-around",
+                justifyContent: "center",
                 // borderStyle: "solid",
                 // borderColor: "black",
                 // borderWidth: 1,
                 alignItems: "center",
-                // marginBottom: 5,
+                marginBottom: 3,
+                marginTop: 3,
                 // backgroundColor: "pink",
               }}
             >
-              <Text style={{ flex: 1 }}>{item.name}</Text>
+              <Text style={{ flex: 1, alignSelf: "center" }}>{item.name}</Text>
               <View
                 style={{
+                  // flex: 1,
+                  justifyContent: "center",
+                  // marginTop: 2,
+                  // marginBottom: 2,
                   width: 30,
                   height: 30,
                   backgroundColor:
@@ -105,10 +113,11 @@ const MatchGraph = ({ mbtiData, myName, myMbti }) => {
       <View
         style={{
           flexDirection: "row",
+          alignSelf: "center",
           // justifyContent: "center",
           alignItems: "center",
           // backgroundColor: "red",
-          // width: "80%",
+          width: "80%",
           // alignContent: "center",
           // borderColor: "black",
           // borderWidth: 1,
@@ -120,6 +129,7 @@ const MatchGraph = ({ mbtiData, myName, myMbti }) => {
           renderItem={renderMatch}
           keyExtractor={(item) => item.id}
           style={{
+            flex: 1,
             width: "50%",
             borderColor: "black",
             borderWidth: 1,

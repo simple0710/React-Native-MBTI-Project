@@ -20,7 +20,7 @@ function ResultScreen({ route, navigation }) {
   const [viewFlag, setViewFlag] = useState([]);
   const [mbtiData, setMbtiData] = useState("");
 
-  const api = "http://10.0.2.2:8080";
+  const api = "http://10.0.2.2:3000";
   // "https://port-0-react-native-mbti-project-lme62alhih8uuf.sel4.cloudtype.app";
   // const api = "http://kiuti.iptime.org:3000";
 
@@ -92,13 +92,13 @@ function ResultScreen({ route, navigation }) {
     }
   };
   useEffect(() => {
-    console.log("loading bar...");
+    // console.log("loading bar...");
     loadingInterval();
   }, [mbtiData]);
 
   useEffect(() => {
     setViewFlag([]);
-    // setProgress(100);
+    setProgress(100);
     setMbtiData([
       {
         name: "김찬민",
@@ -120,7 +120,7 @@ function ResultScreen({ route, navigation }) {
       },
       {
         name: "김찬민 3",
-        labels: ["ISFP", "INFP", "INTP", "ESFP", "ENTP", "ENTJ", "INTP"],
+        labels: ["ESFP", "INFP", "INTP", "ESFP", "ENTP", "ENTJ", "INTP"],
         datasets: [
           {
             data: [50, 10, 5, 5, 5, 4, 1],
@@ -128,8 +128,8 @@ function ResultScreen({ route, navigation }) {
         ],
       },
       {
-        name: "김찬민 3",
-        labels: ["ISFP", "INFP", "INTP", "ESFP", "ENTP", "ENTJ", "INTP"],
+        name: "김찬민 4",
+        labels: ["ISTP", "INFP", "INTP", "ESFP", "ENTP", "ENTJ", "INTP"],
         datasets: [
           {
             data: [50, 10, 5, 5, 5, 4, 1],
@@ -150,9 +150,9 @@ function ResultScreen({ route, navigation }) {
     <>
       {finalProgress == 100 && mbtiData ? (
         <>
-          <Text style={{ position: "absolute", bottom: 0 }}>test</Text>
           <SafeAreaView style={{ flex: 1 }}>
-            <Tab.Navigator
+            <First mbtiData={mbtiData}></First>
+            {/* <Tab.Navigator
               initialRouteName="First"
               screenOptions={{
                 tabBarLabelStyle: {
@@ -174,7 +174,7 @@ function ResultScreen({ route, navigation }) {
                 component={Second}
                 initialParams={{ mbtiData }}
               />
-            </Tab.Navigator>
+            </Tab.Navigator> */}
           </SafeAreaView>
         </>
       ) : (

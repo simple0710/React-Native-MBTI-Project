@@ -2,16 +2,35 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import { FlatList, View, Dimensions, SafeAreaView } from "react-native";
 import { Button, Text, DefaultTheme } from "react-native-paper";
-
+import {
+  INTJ,
+  INTP,
+  ENTJ,
+  ENTP,
+  ISTJ,
+  ISFJ,
+  ESTJ,
+  ESFJ,
+  INFJ,
+  INFP,
+  ENFJ,
+  ENFP,
+  ISTP,
+  ISFP,
+  ESTP,
+  ESFP,
+} from "./graph/MBTIType";
 import { BarChart } from "react-native-chart-kit";
 import MatchGraph from "./graph/MatchGraph";
 // css
 // import styles from "./styles/result_css";
-
-const First = ({ route }) => {
-  const mbtiData = route.params.mbtiData;
+// const First = ({route}) => {
+const First = ({ mbtiData }) => {
+  // const mbtiData = route.params.mbtiData;
+  // console.log(mbtiData);
+  // console.log(mbtiData);
+  // const mbtiData = mbtiData;
   const [viewFlag, setViewFlag] = useState([]);
-
   // 토글 기능 수행
   const handleViewItem = useCallback((index) => {
     let flagCopy = [...viewFlag];
@@ -19,62 +38,97 @@ const First = ({ route }) => {
     setViewFlag(flagCopy);
   });
 
-  /**
-   * MBTI Color 지정
-   */
-  const mbtiColor = [
-    [
-      ["INTJ", "논리술사"],
-      ["INTP", "전략가"],
-      ["ENTJ", "통솔자"],
-      ["ENTP", "논리술사"],
-      "#88619A",
-      "분석가형",
-    ],
-    [
-      ["ISTJ", "현실주의자"],
-      ["ISFJ", "방어자"],
-      ["ESTJ", "경영진"],
-      ["ESFJ", "영사"],
-      "#4298B4",
-      "관리자형",
-    ],
-    [
-      ["INFJ", "옹호자"],
-      ["INFP", "중재자"],
-      ["ENFJ", "선도자"],
-      ["ENFP", "활동가"],
-      "#33A474",
-      "외교관형",
-    ],
-    [
-      ["ISTP", "거장"],
-      ["ISFP", "모험가"],
-      ["ESTP", "기업가"],
-      ["ESFP", "연예인"],
-      "#E4AE3A",
-      "탐험가형",
-    ],
-  ];
-
   const MBTIResultList = useCallback((items, index) => {
-    let color = "black";
-    let mbtiTextType1 = "";
-    let mbtiTextType2 = "";
-    for (let i = 0; i < mbtiColor.length; i++) {
-      if (mbtiTextType1) {
-        break
-      }
-      for (let j = 0; j < mbtiColor[i].length; j++) {
-        // 적절한 유형에 매치한다.
-        if (mbtiColor[i][j][0] == items.labels[0]) {
-          color = mbtiColor[i][4];
-          mbtiTextType1 = mbtiColor[i][5];
-          mbtiTextType2 = mbtiColor[i][j][1];
-          break;
-        }
-      }
+    let mbtiTextType = ""; // type ex) xx형
+    let mbtiTextName = ""; // name ex) 연예인, 모험가...
+    let mbtiColor = "black"; // 색상
+    let mbtiCharacteristics = [];
+    // 분석가형
+    if (items.labels[0] === "INTJ") {
+      mbtiTextType = INTJ.type;
+      mbtiTextName = INTJ.name;
+      mbtiColor = INTJ.color;
+      mbtiCharacteristics = INTJ.characteristic;
+    } else if (items.labels[0] === "INTP") {
+      mbtiTextType = INTP.type;
+      mbtiTextName = INTP.name;
+      mbtiColor = INTP.color;
+      mbtiCharacteristics = INTP.characteristic;
+    } else if (items.labels[0] === "ENTJ") {
+      mbtiTextType = ENTJ.type;
+      mbtiTextName = ENTJ.name;
+      mbtiColor = ENTJ.color;
+      mbtiCharacteristics = ENTJ.characteristic;
+    } else if (items.labels[0] === "ENTP") {
+      mbtiTextType = ENTP.type;
+      mbtiTextName = ENTP.name;
+      mbtiColor = ENTP.color;
+      mbtiCharacteristics = ENTP.characteristic;
+      // 관리자형
+    } else if (items.labels[0] === "ISTJ") {
+      mbtiTextType = ISTJ.type;
+      mbtiTextName = ISTJ.name;
+      mbtiColor = ISTJ.color;
+      mbtiCharacteristics = ISTJ.characteristic;
+    } else if (items.labels[0] === "ISFJ") {
+      mbtiTextType = ISFJ.type;
+      mbtiTextName = ISFJ.name;
+      mbtiColor = ISFJ.color;
+      mbtiCharacteristics = ISFJ.characteristic;
+    } else if (items.labels[0] === "ESTJ") {
+      mbtiTextType = ESTJ.type;
+      mbtiTextName = ESTJ.name;
+      mbtiColor = ESTJ.color;
+      mbtiCharacteristics = ESTJ.characteristic;
+    } else if (items.labels[0] === "ESFJ") {
+      mbtiTextType = ESFJ.type;
+      mbtiTextName = ESFJ.name;
+      mbtiColor = ESFJ.color;
+      mbtiCharacteristics = ESFJ.characteristic;
+      // 외교관형
+    } else if (items.labels[0] === "INFJ") {
+      mbtiTextType = INFJ.type;
+      mbtiTextName = INFJ.name;
+      mbtiColor = INFJ.color;
+      mbtiCharacteristics = INFJ.characteristic;
+    } else if (items.labels[0] === "INFP") {
+      mbtiTextType = INFP.type;
+      mbtiTextName = INFP.name;
+      mbtiColor = INFP.color;
+      mbtiCharacteristics = INFP.characteristic;
+    } else if (items.labels[0] === "ENFJ") {
+      mbtiTextType = ENFJ.type;
+      mbtiTextName = ENFJ.name;
+      mbtiColor = ENFJ.color;
+      mbtiCharacteristics = ENFJ.characteristic;
+    } else if (items.labels[0] === "ENFP") {
+      mbtiTextType = ENFP.type;
+      mbtiTextName = ENFP.name;
+      mbtiColor = ENFP.color;
+      mbtiCharacteristics = ENFP.characteristic;
+      // 탐험가형
+    } else if (items.labels[0] === "ISTP") {
+      mbtiTextType = ISTP.type;
+      mbtiTextName = ISTP.name;
+      mbtiColor = ISTP.color;
+      mbtiCharacteristics = ISTP.characteristic;
+    } else if (items.labels[0] === "ISFP") {
+      mbtiTextType = ISFP.type;
+      mbtiTextName = ISFP.name;
+      mbtiColor = ISFP.color;
+      mbtiCharacteristics = ISFP.characteristic;
+    } else if (items.labels[0] === "ESTP") {
+      mbtiTextType = ESTP.type;
+      mbtiTextName = ESTP.name;
+      mbtiColor = ESTP.color;
+      mbtiCharacteristics = ESTP.characteristic;
+    } else if (items.labels[0] === "ESFP") {
+      mbtiTextType = ESFP.type;
+      mbtiTextName = ESFP.name;
+      mbtiColor = ESFP.color;
+      mbtiCharacteristics = ESFP.characteristic;
     }
+
     return (
       <>
         <SafeAreaView
@@ -82,6 +136,7 @@ const First = ({ route }) => {
             alignSelf: "center",
             marginBottom: 20,
             width: Dimensions.get("window").width - 50,
+            backgroundColor: "white",
           }}
         >
           <Button
@@ -98,7 +153,16 @@ const First = ({ route }) => {
           </Button>
           {viewFlag[index] && (
             <>
-              <View>
+              <View
+                style={
+                  {
+                    // borderBottomColor: "black",
+                    // borderTopWidth: 0.5,
+                    // borderBottomWidth: 1,
+                    // borderStyle: "solid",
+                  }
+                }
+              >
                 <BarChart
                   data={items}
                   width={Dimensions.get("window").width - 50} // 그래프 사이 간격
@@ -116,28 +180,61 @@ const First = ({ route }) => {
               </View>
               <View style={{ alignItems: "center" }}>
                 <Text>
-                  <Text style={{ color: color }}>{items.labels[0]} </Text>:{" "}
-                  {mbtiTextType1} - {mbtiTextType2}
+                  <Text style={{ color: mbtiColor }}>{items.labels[0]} </Text>:{" "}
+                  {mbtiTextType} - {mbtiTextName}
                 </Text>
               </View>
+
+              {/* 3개의 특징 나열 */}
               <View
                 style={{
                   width: "90%",
                   // backgroundColor: "blue",
                   alignSelf: "center",
-                  marginBottom: 5,
+                  marginBottom: 20,
                 }}
               >
-                <Text>특징</Text>
-                <Text>1. test</Text>
-                <Text>2. test2</Text>
-                <Text>3. test3</Text>
+                <Text
+                  style={{
+                    width: "100%",
+                    borderBottomColor: "black",
+                    borderBottomWidth: 0.6,
+                    borderStyle: "solid",
+                    fontSize: 16,
+                  }}
+                >
+                  특징
+                </Text>
+                <Text>1. {mbtiCharacteristics[0]}</Text>
+                <Text>2. {mbtiCharacteristics[1]}</Text>
+                <Text>3. {mbtiCharacteristics[2]}</Text>
               </View>
-              <MatchGraph
-                mbtiData={mbtiData}
-                myName={items.name}
-                myMbti={items.labels[0]}
-              ></MatchGraph>
+              {/* 궁합도 표 출력 */}
+              <View
+                style={{
+                  width: "90%",
+                  // backgroundColor: "blue",
+                  alignSelf: "center",
+                  // marginBottom: 5,
+                }}
+              >
+                <Text
+                  style={{
+                    width: "100%",
+                    borderBottomColor: "black",
+                    borderBottomWidth: 0.6,
+                    borderStyle: "solid",
+                    fontSize: 16,
+                  }}
+                >
+                  궁합표
+                </Text>
+                <MatchGraph
+                  mbtiData={mbtiData}
+                  myName={items.name}
+                  myMbti={items.labels[0]}
+                ></MatchGraph>
+              </View>
             </>
           )}
         </SafeAreaView>
