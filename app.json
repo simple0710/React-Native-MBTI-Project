@@ -1,9 +1,11 @@
 {
   "expo": {
-    "name": "KIUTI",
-    "slug": "KIUTI",
+    "name": "kiuti",
+    "slug": "kiuti",
     "version": "0.0.1",
-    "assetBundlePatterns": ["**/*"]
+    "assetBundlePatterns": [
+      "**/*"
+    ]
   },
-  "name": "KIUTI"
+  "name": "kiuti"
 }
