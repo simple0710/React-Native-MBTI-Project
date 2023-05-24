@@ -4,10 +4,9 @@ import { createMaterialTopTabNavigator } from "@react-navigation/material-top-ta
 import { Text } from "react-native-paper";
 import { Dimensions, SafeAreaView, View } from "react-native";
 import axios from "axios";
-// css
+// component
 import Loading from "./Loading";
 import First from "./menu/screen/First";
-import Second from "./menu/screen/Second";
 
 const Tab = createMaterialTopTabNavigator();
 

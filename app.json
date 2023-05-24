@@ -1,11 +1,9 @@
 {
   "expo": {
-    "name": "MyApp",
-    "slug": "MyApp",
-    "version": "1.0.0",
-    "assetBundlePatterns": [
-      "**/*"
-    ]
+    "name": "KIUTI",
+    "slug": "KIUTI",
+    "version": "0.0.1",
+    "assetBundlePatterns": ["**/*"]
   },
-  "name": "MyApp"
+  "name": "KIUTI"
 }

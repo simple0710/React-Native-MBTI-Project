@@ -146,9 +146,13 @@ const First = ({ mbtiData }) => {
             style={{ alignSelf: "flex-start" }}
           >
             {viewFlag[index] ? (
-              <Text key={index}>▼ "{items.name}"님의 결과</Text>
+              <Text key={index}>
+                {"▼"} "{items.name}"님의 결과
+              </Text>
             ) : (
-              <Text key={index}>▶ "{items.name}"님의 결과</Text>
+              <Text key={index}>
+                {"▶"} "{items.name}"님의 결과
+              </Text>
             )}
           </Button>
           {viewFlag[index] && (

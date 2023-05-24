@@ -137,9 +137,33 @@ const HomeScreen = ({ navigation }) => {
               height: "40%",
             }}
           ></Image>
+          <TouchableOpacity
+            style={{
+              position: "absolute",
+              top: 5,
+              right: 5,
+            }}
+            onPress={() => {
+              setSideFlag((state) => !state);
+              toggleSidebar();
+              // console.log(sideFlag);
+              // startAnimation();
+            }}
+          >
+            <Image
+              source={require("./Img/info.png")}
+              resizeMode="contain"
+              style={{ height: 20, width: 20 }}
+              // onPress={() => {
+              //   setSideFlag((state) => !state);
+              //   // console.log(sideFlag);
+              //   // startAnimation();
+              // }}
+            ></Image>
+          </TouchableOpacity>
         </View>
         {/* sideBar */}
-        <Sidebar></Sidebar>
+        <Sidebar sideFlag={sideFlag} configHandler={configHandler}></Sidebar>
 
         {/* Body */}
         <View
