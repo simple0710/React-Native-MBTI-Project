@@ -2,7 +2,7 @@
 export const INTJ = {
   color: "#88619A",
   type: "분석가형",
-  name: "논리술사",
+  name: "전략가",
   characteristic: [
     "뛰어난 전략과 계획력",
     "분석적 사고력",
@@ -18,13 +18,13 @@ export const INTP = {
 export const ENTJ = {
   color: "#88619A",
   type: "분석가형",
-  name: "논리술사",
+  name: "통솔자",
   characteristic: ["리더십과 조직력", "결단력과 추진력", "비전과 전략"],
 };
 export const ENTP = {
   color: "#88619A",
   type: "분석가형",
-  name: "논리술사",
+  name: "변론가",
   characteristic: [
     "유창한 언변과 설득력",
     "다양한 관심사와 호기심",
@@ -46,7 +46,7 @@ export const ISTJ = {
 export const ISFJ = {
   color: "#4298B4",
   type: "관리자형",
-  name: "방어자",
+  name: "수호자",
   characteristic: [
     "동정심과 배려심",
     "신뢰할 수 있는 동료",
@@ -56,7 +56,7 @@ export const ISFJ = {
 export const ESTJ = {
   color: "#4298B4",
   type: "관리자형",
-  name: "경영진",
+  name: "경영자",
   characteristic: [
     "조직력과 리더십",
     "신속한 의사결정과 실행력",
@@ -66,7 +66,7 @@ export const ESTJ = {
 export const ESFJ = {
   color: "#4298B4",
   type: "관리자형",
-  name: "영사",
+  name: "집정관",
   characteristic: ["사회성과 친화력", "동료애와 협력", "관리와 조화"],
 };
 
@@ -104,7 +104,7 @@ export const ENFP = {
 export const ISTP = {
   color: "#E4AE3A",
   type: "탐험가형",
-  name: "거장",
+  name: "장인",
   characteristic: ["뛰어난 기술과 손재주", "현실적인 관찰력", "독립적인 성향"],
 };
 export const ISFP = {
@@ -116,7 +116,7 @@ export const ISFP = {
 export const ESTP = {
   color: "#E4AE3A",
   type: "탐험가형",
-  name: "기업가",
+  name: "사업가",
   characteristic: [
     "대담하고 행동적인 성향",
     "적응력과 융통성",
