@@ -113,6 +113,7 @@ const Sidebar = () => {
         ]}
         {...panResponder.panHandlers}
       >
+        {/* SideBarHeader */}
         <View
           style={{
             zIndex: 2,
@@ -131,8 +132,11 @@ const Sidebar = () => {
             alignItems: "center",
           }}
         >
+          {/* 버전 정보 */}
           <Text style={{ marginTop: 5, marginBottom: 5 }}>version : 0.0.1</Text>
+          {/* 개인정보처리방침 */}
           <TouchableOpacity
+            style={{ marginBottom: 5 }}
             onPress={() => {
               Linking.openURL("https://sites.google.com/view/kiuti");
             }}
@@ -140,11 +144,29 @@ const Sidebar = () => {
             <Text
               style={{
                 borderBottomColor: "black",
-                borderBottomWidth: 1,
+                borderBottomWidth: 0.6,
                 borderStyle: "solid",
               }}
             >
               개인정보처리방침
+            </Text>
+          </TouchableOpacity>
+          {/* 개발자 정보, 1. 부석준 박사님 링크 */}
+          <TouchableOpacity
+            onPress={() => {
+              Linking.openURL(
+                "https://scholar.google.com/citations?user=5nEEICYAAAAJ&hl=ko&oi=ao"
+              );
+            }}
+          >
+            <Text
+              style={{
+                borderBottomColor: "black",
+                borderStyle: "solid",
+                borderBottomWidth: 0.6,
+              }}
+            >
+              개발자 정보
             </Text>
           </TouchableOpacity>
         </View>
