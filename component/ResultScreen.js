@@ -19,7 +19,6 @@ function ResultScreen({ route, navigation }) {
   const [mbtiData, setMbtiData] = useState("");
 
   // const api = "http://10.0.2.2:3000";
-  // "https://port-0-react-native-mbti-project-lme62alhih8uuf.sel4.cloudtype.app";
   const api = "http://kiuti.iptime.org:3000";
 
   const getMbtiResult = async (formData) => {

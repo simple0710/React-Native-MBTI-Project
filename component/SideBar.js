@@ -126,6 +126,7 @@ const Sidebar = () => {
         >
           <Text style={{ fontSize: 16 }}>상세 정보</Text>
         </View>
+        {/* SideBarBody */}
         <View
           style={{
             flex: 0.9,
@@ -133,7 +134,7 @@ const Sidebar = () => {
           }}
         >
           {/* 버전 정보 */}
-          <Text style={{ marginTop: 5, marginBottom: 5 }}>version : 0.0.1</Text>
+          <Text style={{ marginTop: 5, marginBottom: 5 }}>version : 0.0.2</Text>
           {/* 개인정보처리방침 */}
           <TouchableOpacity
             style={{ marginBottom: 5 }}
@@ -151,11 +152,13 @@ const Sidebar = () => {
               개인정보처리방침
             </Text>
           </TouchableOpacity>
-          {/* 개발자 정보, 1. 부석준 박사님 링크 */}
+          {/* 개발자 정보 notion 멤버 링크*/}
           <TouchableOpacity
             onPress={() => {
               Linking.openURL(
-                "https://scholar.google.com/citations?user=5nEEICYAAAAJ&hl=ko&oi=ao"
+                "https://instinctive-seeker-860.notion.site/5b59899c4adf4b2889d0b2c882cf1e23"
+
+                // "https://scholar.google.com/citations?user=5nEEICYAAAAJ&hl=ko&oi=ao"
               );
             }}
           >
